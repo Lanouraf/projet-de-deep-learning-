@@ -1,0 +1,1 @@
+#fichier où on met les différentes architectures torch de nos modèles 
