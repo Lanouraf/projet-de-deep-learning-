@@ -1,3 +1,4 @@
+from sklearn.feature_extraction.text import CountVectorizer
 from DATALOAD import data_twitter
 home_data=data_twitter()
 class Sequences(Dataset):
