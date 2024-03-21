@@ -16,7 +16,7 @@ from torchvision.transforms import ToTensor
 import pandas as pd
 import streamlit as st
 
-from viz import training_curves
+
 
 
 def get_FashionMNIST_datasets(batch_size=64, only_loader=True):
@@ -384,34 +384,7 @@ def get_and_train_model(
         print(model.metrics)
     return model
 
-
-if __name__ == "__main__":
-
-    mode = "script"
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-e", "--epochs", type=int, default=5)
-    parser.add_argument("--hidden", type=int, default=2)
-    parser.add_argument("--dropout_rate", type=float, default=0.0)
-    args = parser.parse_args()
-
-    train_dataloader, test_dataloader = get_FashionMNIST_datasets(64)
-
-    for X, y in test_dataloader:
-        print(f"Shape of X [N, C, H, W]: {X.shape}")
-        print(f"Shape of y: {y.shape} {y.dtype}")
-        break
-
-    model = get_and_train_model(
-        train_dataloader,
-        test_dataloader,
-        hidden_layers=args.hidden,
-        dropout_rate=args.dropout_rate,
-        epochs=args.epochs,
-        mode=mode,
-    )
-    training_curves(model, mode)
-    
+ 
     
     
     ########################################
