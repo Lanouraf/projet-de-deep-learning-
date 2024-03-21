@@ -3,7 +3,7 @@
 
 import torch.nn as nn
 
-from BatchNorm import BatchNorm2D, BatchNorm1D
+from Model.BatchNorm import BatchNorm2D, BatchNorm1D
 
 
 class LeNet(nn.Module):

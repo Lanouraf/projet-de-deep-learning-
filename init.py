@@ -1,4 +1,4 @@
-from .BatchNorm import BatchNorm
+from .Model.BatchNorm import BatchNorm
 
 
 def BatchNorm2D(filters, epsilon=1e-5):
