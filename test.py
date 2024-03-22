@@ -1,8 +1,21 @@
+"""
+This script trains multiple LeNet-5 models with different configurations and saves the loss values.
+It uses the MNIST dataset from torchvision and torch.utils.data.DataLoader for data loading.
+The trained models include Vanilla LeNet-5, LeNet-5 with Batch Normalization, and LeNet-5 with PyTorch's BatchNorm.
+The loss values are saved in separate numpy files for each model configuration.
+"""
+
+
+
+# Rest of the code...
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
 from fonctions import fit
 from batch.architecture import LeNet, LeNetBN, LeNetStockBN
+import numpy as np
+import os
+import numpy as np
 
 
 # Get dataset
@@ -16,6 +29,41 @@ train_dataloader = DataLoader(train, batch_size = 256, shuffle = True)
 valid_dataloader = DataLoader(valid, batch_size = 512, shuffle = False)
 
 
+# List of file names
+file_names = ['val_losses_bn3.npy', 'val_losses_vanilla2.npy', 'val_losses_stockbn.npy', 
+              'val_losses_bn2.npy', 'val_losses_bn.npy', 'losses_bn3.npy', 
+              'losses_vanilla2.npy', 'losses_stockbn.npy', 'losses_bn2.npy', 
+              'losses_bn.npy', 'losses_vanilla.npy']
+
+
+all_losses_bn3 = []
+all_losses_vanilla2 = []
+all_losses_stockbn = []
+all_losses_bn2 = []
+all_losses_bn = []
+val_losses_bn3 = []
+val_losses_vanilla2 = []
+val_losses_stockbn = []
+val_losses_bn2 = []
+val_losses_bn = []
+losses_bn3 = []
+losses_vanilla2 = []
+losses_stockbn = []
+losses_bn2 = []
+losses_bn = []
+losses_vanilla = []
+
+variables = [val_losses_bn3, val_losses_vanilla2, val_losses_stockbn, 
+             val_losses_bn2, val_losses_bn, losses_bn3, 
+             losses_vanilla2, losses_stockbn, losses_bn2, 
+             losses_bn, losses_vanilla]
+
+for i in range(len(file_names)):
+    if os.path.isfile(file_names[i]):
+        # Load the loss values if the file exists
+        variables[i] = np.load(file_names[i])
+    else:
+        pass
 # Train models
 # ---------------------------------------------
 # Vanilla LeNet-5
@@ -65,6 +113,26 @@ for i in range(3):
     losses_stockbn, val_losses_stockbn, _ = fit(model_stockbn, train_dataloader, valid_dataloader, epochs=10, lr=1e-3)
     all_losses_stockbn.append((losses_stockbn, val_losses_stockbn))
 
+
+
+
+
+# Store loss values
+
+# Store validation loss values
+np.save('val_losses_bn3.npy', val_losses_bn3)
+np.save('val_losses_vanilla2.npy', val_losses_vanilla2)
+np.save('val_losses_stockbn.npy', val_losses_stockbn)
+np.save('val_losses_bn2.npy', val_losses_bn2)
+np.save('val_losses_bn.npy', val_losses_bn)
+
+#store training losses values
+np.save('losses_bn3.npy', losses_bn3)
+np.save('losses_vanilla2.npy', losses_vanilla2)
+np.save('losses_stockbn.npy', losses_stockbn)
+np.save('losses_bn2.npy', losses_bn2)
+np.save('losses_bn.npy', losses_bn)
+np.save('losses_vanilla.npy', losses_vanilla)
 
 # Plot results
 # ---------------------------------------------
