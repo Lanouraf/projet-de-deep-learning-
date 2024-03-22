@@ -94,7 +94,7 @@ def fit(model, train_dataloader, valid_dataloader, epochs, loss_fn=nn.CrossEntro
         last_accuracy = accuracy_batch / len(valid_dataloader)
         accuracies.append(last_accuracy)
 
-    return losses, valid_losses, accuracies
+    return losses, valid_losses, accuracies, model
 
 
 def accuracy(preds, y):
