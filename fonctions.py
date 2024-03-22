@@ -1,9 +1,16 @@
 """Functions for the deep learning mode.
 
-Notes
------
-Inspired from https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html.
+This script contains functions for training and evaluating a deep learning model. It includes a training loop, a function to compute accuracy, and other utility functions.
+
+The main function in this script is `fit`, which performs the training loop for a given model. It takes the model, training data, validation data, number of epochs, loss function, learning rate, and other parameters as inputs. It trains the model using the provided data and returns the training losses, validation losses, and accuracy for each epoch.
+
+Other functions in this script include:
+- `accuracy`: Computes the accuracy of the network given the output predictions and ground truth labels.
+
+Note: This script requires the following dependencies: torch, torch.nn, torch.optim, tqdm, matplotlib.pyplot.
+
 """
+
 
 import argparse
 import os
