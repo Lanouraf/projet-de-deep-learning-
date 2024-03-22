@@ -1,4 +1,4 @@
-import panda as pd
+import pandas as pd
 def data_twitter():
     """Loads the Apple Twitter sentiment texts data from Kaggle.
 
