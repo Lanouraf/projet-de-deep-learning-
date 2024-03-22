@@ -2,7 +2,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
 from fonctions import fit
-from architecture import LeNet, LeNetBN, LeNetStockBN
+from batch.architecture import LeNet, LeNetBN, LeNetStockBN
 
 
 # Get dataset
