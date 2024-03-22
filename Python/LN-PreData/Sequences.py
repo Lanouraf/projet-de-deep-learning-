@@ -1,7 +1,7 @@
 import sklearn
 from sklearn.feature_extraction.text import CountVectorizer
 from torch.utils.data import DataLoader, Dataset
-from DATALOAD import data_twitter
+from .DATALOAD import data_twitter
 home_data=data_twitter()
 class Sequences(Dataset):
         def __init__(self, home_data, vectorizer):
