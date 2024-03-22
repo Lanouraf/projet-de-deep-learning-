@@ -5,6 +5,7 @@ import torch.nn as nn
 class BatchNorm(nn.Module):
     def __init__(self, filters, epsilon=1e-5, dims='2D'):
         """
+        following the method from : https://github.com/David-Estevez/BatchNorm/tree/master/BatchNorm
         Implementation of the Batch Normalization block from:
 
         Sergey Ioffe and Christian Szegedy. Batch normalization: Accelerating deep network
