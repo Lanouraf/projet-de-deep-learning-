@@ -1,5 +1,6 @@
 import sklearn
 from sklearn.feature_extraction.text import CountVectorizer
+from torch.utils.data import DataLoader, Dataset
 from DATALOAD import data_twitter
 home_data=data_twitter()
 class Sequences(Dataset):
@@ -16,6 +17,7 @@ class Sequences(Dataset):
 
         def __len__(self):
             return self.sequences.shape[0]
+
 
 vectorizer = CountVectorizer(stop_words="english", max_df=0.99, min_df=0.005)
 list_texts = home_data.text.tolist()
