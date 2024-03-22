@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch
 from HOMEMADE_LN import LayerNorm
 class BagOfWordsClassifier(nn.Module):
         def __init__(self, vocab_size, hidden1, hidden2, out_shape):
@@ -49,7 +50,7 @@ class BagOfWordsClassifierLayer(nn.Module):
 
 class BagOfWordsClassifierLayerHM(nn.Module):
         def __init__(self, vocab_size, hidden1, hidden2, out_shape):
-            super(BagOfWordsClassifierLayer, self).__init__()
+            super(BagOfWordsClassifierLayerHM, self).__init__()
             self.layer1 = nn.Sequential(
                 nn.Linear(vocab_size, hidden1),
                 LayerNorm(hidden1),  # Utilisation de torch.nn.LayerNorm
