@@ -26,6 +26,15 @@ BOW_LN,loss=LNtrain(model,optimizer,criterion)
 BOW,loss2=LNtrain(model2,optimizer2,criterion)
 BOW_HM_LN,loss3=LNtrain(model3,optimizer3,criterion)
 
+losses_dict = {
+    'BOW': loss2,
+    'BOW_LN': loss,
+    'BOW_HM_LN': loss3
+}
+
+# Enregistrer le dictionnaire des pertes dans un fichier avec torch.save()
+torch.save(losses_dict, 'losses.pth')
+
 torch.save(BOW.state_dict(), 'BOW.pth')
 torch.save(BOW_LN.state_dict(), 'BOW_LN.pth')
 torch.save(BOW_HM_LN.state_dict(), 'BOW_HM_LN.pth')

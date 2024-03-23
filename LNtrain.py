@@ -6,7 +6,7 @@ train_dataset,train_loader,test_dataset,test_loader=prep_data()
 def LNtrain(model,optimizer,criterion,):
     model.train()
     train_losses = []
-    for epoch in range(10):
+    for epoch in range(20):
         progress_bar = tqdm_notebook(train_loader, leave=False)
         losses = []
         total = 0
