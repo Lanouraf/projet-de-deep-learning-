@@ -135,7 +135,7 @@ def plot_compare(losses_a, val_losses_a, losses_b,val_losses_b ,legend_a="model 
     plt.ylabel("Loss")
     plt.legend((plt_a, plt_b), (legend_a, legend_b))
     if save_to is not None:
-        plt.savefig(save_to + '.svg')
+        plt.savefig(save_to + '.png')
         
 
     f = plt.figure()
@@ -149,4 +149,4 @@ def plot_compare(losses_a, val_losses_a, losses_b,val_losses_b ,legend_a="model 
     plt.ylabel("Loss")
     plt.legend((plt_a, plt_b), (legend_a + '-val', legend_b + '-val'))
     if save_to is not None:
-        plt.savefig(save_to + '_val.svg')
+        plt.savefig(save_to + '_val.png')
