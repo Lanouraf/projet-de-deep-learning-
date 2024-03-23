@@ -134,7 +134,7 @@ def accuracy(preds, y):
 
 #########################
 
-def plot_compare(all_losses_a, all_losses_b, legend_a="model a", legend_b="model b", save_to="out"):
+def plot_compare(all_losses_a, all_losses_b, mode, legend_a="model a", legend_b="model b", save_to="out"):
     """
     Draws plots comparing models a and b from their training and validation losses
 
@@ -162,6 +162,8 @@ def plot_compare(all_losses_a, all_losses_b, legend_a="model a", legend_b="model
     plt.xlabel("Epochs")
     plt.ylabel("Loss")
     plt.legend((plt_a, plt_b), (legend_a, legend_b))
+    if mode == "streamlit":
+        st.pyplot(f)
     if save_to is not None:
         plt.savefig(save_to + '.png')
 
@@ -175,6 +177,8 @@ def plot_compare(all_losses_a, all_losses_b, legend_a="model a", legend_b="model
     plt.xlabel("Epochs")
     plt.ylabel("Loss")
     plt.legend((plt_a, plt_b), (legend_a + '-val', legend_b + '-val'))
+    if mode == "streamlit":
+        st.pyplot(f)
     if save_to is not None:
         plt.savefig(save_to + '-val.png')
     plt.show()
