@@ -12,7 +12,8 @@ def main():
         "Choisissez l'expérience",
         [
             "Home",
-            "Homemade Layer Normalisation"
+            "Homemade Layer Normalisation", 
+            "Homemade Batch Normalisation"
         ],
     )
     if app_mode == "Home":
