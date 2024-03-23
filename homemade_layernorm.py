@@ -8,8 +8,9 @@ import torch
 from LNtrain import LNtest
 from LNModule import BagOfWordsClassifier, BagOfWordsClassifierLayer, BagOfWordsClassifierLayerHM
 from DATALOAD import data_review
-import gdown
+import json
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
 
 def homemade_layernorm():
     st.title("Homemade Layer Normalization")
@@ -29,11 +30,9 @@ def homemade_layernorm():
     st.write("- Un modèle qui applique la layer norm implémentée à la main")
     
     train_dataset, train_loader, test_dataset, test_loader = prep_data()
-    # URL de téléchargement direct depuis Google Drive
-    gdd.download_file_from_google_drive(file_id='1lESMtwwy_qzfWtpfpGDQKzLOkABrIyp', dest_path='/losses.pth')
     
-    # Chargement des pertes depuis le fichier losses.pth
-    losses = torch.load('/losses.pth') 
+    # Chargement des pertes depuis le fichier losses.csv
+    losses_df = pd.read_csv("losses.csv")
     
     # Lecture des accuracies depuis le fichier accuracies.csv dans votre répertoire Git
     accuracies_df = pd.read_csv("accuracies.csv", header=None, index_col=0)  # Charger sans utiliser la première colonne comme index
@@ -53,17 +52,17 @@ def homemade_layernorm():
     selected_models_keys = [model_names[name] for name in selected_models_ui]
     selected_models = st.multiselect("Select models to compare", selected_models_ui)
 
-    # Affichage des pertes pour les modèles sélectionnés
     st.subheader("Loss")
-    fig_loss, ax_loss = plt.subplots()
     for model_name in selected_models:
         key = model_names.get(model_name)
-        if key in losses:
-            ax_loss.plot(losses[key], label=model_name)
-    ax_loss.set_xlabel("Epoch")
-    ax_loss.set_ylabel("Loss")
-    ax_loss.legend()
-    st.pyplot(fig_loss)
+        if key in losses_df['Model'].values:
+            loss_values = json.loads(losses_df[losses_df['Model'] == key]['Loss'].iloc[0])
+            plt.plot(loss_values, label=model_name)
+
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.legend()
+    st.pyplot()
 
     # Affichage des accuracies pour les modèles sélectionnés
     st.subheader("Accuracy")
@@ -71,3 +70,7 @@ def homemade_layernorm():
         key = model_names.get(model_name)
         if key in accuracies_dict:
             st.write(f"Accuracy for {model_name}: {accuracies_dict[key]}")
+
+    # Affichage des courbes de perte pour les modèles sélectionnés
+
+
