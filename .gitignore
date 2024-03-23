@@ -1,4 +1,11 @@
 BOW.pth
 BOW_LN.pth
 BOW_HM_LN.pth
-losses.pth
+
+best_model_bn.pth
+best_model_bn2.pth
+best_model_bn3.pth
+
+best_model_stockbn.pth
+best_model_vanilla.pth
+best_model_vanilla2.pth

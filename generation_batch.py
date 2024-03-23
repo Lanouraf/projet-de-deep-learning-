@@ -112,9 +112,6 @@ best_model_stockbn = model_stockbn
 torch.save(best_model_stockbn.state_dict(), 'best_model_stockbn.pth')
 
 
-
-
-
 # Store loss values
 
 np.save('valeur loss-models-batch\\val_losses_bn3.npy', val_losses_bn3)
@@ -132,12 +129,5 @@ np.save('valeur loss-models-batch\\losses_bn2.npy', losses_bn2)
 np.save('valeur loss-models-batch\\losses_bn.npy', losses_bn)
 np.save('valeur loss-models-batch\\losses_vanilla.npy', losses_vanilla)
 
-# Plot results
-# ---------------------------------------------
 
-plot_compare(losses_vanilla, val_losses_vanilla,losses_bn,val_losses_bn, legend_a="Vanilla LeNet-5", legend_b="LeNet-5 with BatchNorm", save_to="batch\comparaison_batch/vanilla")
-plot_compare(losses_bn, val_losses_bn,losses_stockbn,val_losses_stockbn, legend_a="LeNet-5 with BatchNorm", legend_b="LeNet-5 with PyTorch's BatchNorm", save_to="batch\comparaison_homemadebatch/torchbatch")
-plot_compare(losses_bn,val_losses_bn,losses_bn2,val_losses_bn2, legend_a="LeNet-5 with BatchNorm", legend_b="LeNet-5 with BatchNorm (High LR)", save_to="batch\comparaison_homemadebatch/bn_high_lr")
-plot_compare(losses_bn2,val_losses_bn2, losses_bn3,val_losses_bn3, legend_a="LeNet-5 with BatchNorm (High LR)", legend_b="LeNet-5 with BatchNorm (Even Higher LR)", save_to="batch\comparaison_bn_high_lr/bn_even_higher_lr")
-plot_compare(losses_vanilla,val_losses_vanilla, losses_vanilla2,val_losses_vanilla2, legend_a="Vanilla LeNet-5", legend_b="Vanilla LeNet-5 (High LR)", save_to="batch\comparaison_vanilla/vanilla_high_lr")
-plot_compare(losses_bn,val_losses_bn,losses_stockbn,val_losses_stockbn, legend_a="LeNet-5 with BatchNorm", legend_b="LeNet-5 with PyTorch's BatchNorm", save_to="batch\comparaison_homemadebatch/torchbatch")
+
