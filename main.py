@@ -12,7 +12,6 @@ gdd.download_file_from_google_drive(file_id='1P28VRYGSueQ7DO7zghG5', dest_path='
 gdd.download_file_from_google_drive(file_id='1INsBCiiYbPC7zNbP7Ufp5jfb0Ku2rTA', dest_path='./BOW_LN.pth')
 gdd.download_file_from_google_drive(file_id='1TstrD3ic2NDqxy_rpFpFp4gYhyvtPZGQ', dest_path='./BOW_HM_LN.pth')
 gdd.download_file_from_google_drive(file_id='1lESMtwwy_qzfWtpfpGDQYKzLOkABrIyp', dest_path='./losses.pth')
-gdd.download_file_from_google_drive(file_id='1Q_hO_bs4-ZiUGysPgDgTFuGGd_UKWjtO', dest_path='./accuracies.pth')
 # BOW HM LN : 1TstrD3ic2NDqxy_rpFpFp4gYhyvtPZGQ
 # BOW LN : 1INsBCiiYbPC7zNbP7Ufp5jfb0Ku2rTA
 # BOW : 1P28VRYGSueQ7DO7zghG5
