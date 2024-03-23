@@ -1,6 +1,7 @@
 BOW.pth
 BOW_LN.pth
 BOW_HM_LN.pth
+losses.pth
 
 best_model_bn.pth
 best_model_bn2.pth
