@@ -1,6 +1,5 @@
 import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
 from google_drive_downloader import GoogleDriveDownloader as gdd
 import torch
 from torchvision import datasets, transforms
@@ -51,7 +50,7 @@ def homemade_batchnormalisation():
     ...
     
     
-    st.write("Nous voulons comparer les performances entre la batchnormalisation implémenté dans pytorch et notre batch normalisation implémentée par nous même.")
+    st.write("Nous voulons comparer les performances entre la batch normalisation implémentée dans pytorch et notre batch normalisation implémentée par nous même.")
     st.write("Nous utilisons le jeu de données MNIST pour entraîner des modèles suivant l'architecture LeNet-5 (Yann LeCun et al. (1998)) avec et sans notre batchnormalisation.")
     
     descriptionMNISt()
@@ -107,7 +106,7 @@ def homemade_batchnormalisation():
     plot_compare(all_losses_stockbn, all_losses_bn,mode="streamlit", legend_a="LeNet-5 with Pytorch-BatchNorm", legend_b="LeNet-5 with Homemade-BatchNorm", save_to="result_plot_batch/StockBN_vs_BatchNorm")
     
     st.write("Le graphique ci-dessus compare les courbes de perte d'entraînement et de perte de validation pour les modèles LeNet-5 avec la batchnorm Pytorch et la homemade BatchNorm.")
-    st.write("On peut remarquer que la batchnorm Pytorch à des performances similaires à notre batchnorm homemade, cequi veut dire que notre implementation est efficace.")
+    st.write("On peut remarquer que la batchnorm Pytorch à des performances similaires à notre batchnorm homemade, ce qui veut dire que notre implémentation est efficace.")
     #on recupères les modèles entrainées depuis google drive et on calcule la précision sur le jeu de test
     
     #on recupère les données de test 
