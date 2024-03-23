@@ -16,7 +16,23 @@ def homemade_batchnormalisation():
     st.write("- Un modèle LeNet-5  avec la BatchNorm de Pytorch")
     st.write("- Un modèle LeNet-5 avec notre BatchNorm fait main")
         
-    # Téléchargement des fichiers depuis Google Drive
+    
+# # Téléchargement des fichiers de loss de nos modèles déjà entrainés depuis Google Drive
+   
+# # Liste des IDs de vos fichiers sur Google Drive
+# file_ids = ['FILE_ID_1', 'FILE_ID_2', 'FILE_ID_3','FILE_ID_3']
 
+# # Liste des noms de fichiers de sortie
+# output_filenames = ['OUTPUT_FILENAME_1.npy', 'OUTPUT_FILENAME_2.npy', 'OUTPUT_FILENAME_3.npy','OUTPUT_FILENAME_3.npy']
+
+# # Boucle pour télécharger chaque fichier
+# for file_id, output_filename in zip(file_ids, output_filenames):
+#     url = f'https://drive.google.com/uc?id={file_id}'
+#     gdown.download(url, output_filename, quiet=False)
+
+# # Maintenant, vous pouvez charger les fichiers .npy
+# data = []
+# for output_filename in output_filenames:
+#     data.append(np.load(output_filename))
     
     
