@@ -29,10 +29,10 @@ def homemade_layernorm():
     train_dataset, train_loader, test_dataset, test_loader = prep_data()
     
     # Téléchargement des fichiers depuis Google Drive
-    gdd.download_file_from_google_drive(file_id='1lESMtwwy_qzfWtpfpGDQKzLOkABrIyp', dest_path='./losses.pth')
+    gdd.download_file_from_google_drive(file_id='1lESMtwwy_qzfWtpfpGDQKzLOkABrIyp', dest_path='/losses.pth')
     
     # Chargement des pertes depuis le fichier losses.pth
-    losses = torch.load('./losses.pth')
+    losses = torch.load('/losses.pth')
     
     # Lecture des accuracies depuis le fichier accuracies.csv dans votre répertoire Git
     accuracies_df = pd.read_csv("accuracies.csv", header=None, index_col=0)  # Charger sans utiliser la première colonne comme index
