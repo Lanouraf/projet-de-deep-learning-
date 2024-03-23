@@ -97,6 +97,29 @@ def fit(model, train_dataloader, valid_dataloader, epochs, loss_fn=nn.CrossEntro
     return losses, valid_losses, accuracies, model
 
 
+
+def testmod(model, test_dataloader, loss_fn=nn.CrossEntropyLoss()):
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    model.to(device)
+    model.eval()
+
+    test_loss = 0
+    accuracy_batch = 0
+    with torch.no_grad():
+        for batch in test_dataloader:
+            xb, yb = batch
+            xb, yb = xb.to(device), yb.to(device)
+            pred = model(xb)
+            loss_batch = loss_fn(pred, yb)
+            test_loss += loss_batch.item()
+
+            accuracy_batch += accuracy(pred, yb).item()
+        test_loss /= len(test_dataloader)
+        accuracy = accuracy_batch / len(test_dataloader)
+
+    return test_loss, accuracy
+
+
 def accuracy(preds, y):
     """
     Computes the accuracy of the network
