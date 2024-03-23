@@ -43,12 +43,11 @@ for i in range(3):
     all_losses_vanilla.append((losses_vanilla, val_losses_vanilla))
     all_acc_vanilla.append(acc_vanilla)
      
-    # Check if the current model has a lower validation loss
-    if min(val_losses_vanilla) < min_val_loss:
-        min_val_loss = min(val_losses_vanilla)
-        # Save best Vanilla LeNet-5 model
-        best_model_vanilla = model_vanilla
-        torch.save(best_model_vanilla.state_dict(), 'best_model_vanilla.pth')
+    
+
+# Save best Vanilla LeNet-5 model
+best_model_vanilla = model_vanilla
+torch.save(best_model_vanilla.state_dict(), 'best_model_vanilla.pth')
 
 # BatchNorm LeNet-5
 all_losses_bn = []
@@ -59,12 +58,10 @@ for i in range(3):
     all_losses_bn.append((losses_bn, val_losses_bn))
     all_acc_bn.append(acc_bn)
     
-    # Check if the current model has a lower validation loss
-    if min(val_losses_bn) < min_val_loss:
-        min_val_loss = min(val_losses_bn)
+
         # Save best Vanilla LeNet-5 model
-        best_model_bn = model_bn
-        torch.save(best_model_bn.state_dict(), 'best_model_bn.pth')
+best_model_bn = model_bn
+torch.save(best_model_bn.state_dict(), 'best_model_bn.pth')
 
 # BatchNorm LeNet-5 with high lr
 all_losses_bn2 = []
@@ -73,12 +70,10 @@ for i in range(3):
     losses_bn2, val_losses_bn2, _,model_bn2 = fit(model_bn2, train_dataloader, valid_dataloader, epochs=10, lr=1e-2)
     all_losses_bn2.append((losses_bn2, val_losses_bn2))
     
-        # Check if the current model has a lower validation loss
-    if min(val_losses_bn2) < min_val_loss:
-        min_val_loss = min(val_losses_bn2)
+
         # Save best Vanilla LeNet-5 model
-        best_model_bn2 = model_bn2
-        torch.save(best_model_bn2.state_dict(), 'best_model_bn2.pth')
+best_model_bn2 = model_bn2
+torch.save(best_model_bn2.state_dict(), 'best_model_bn2.pth')
 
 # BatchNorm LeNet-5 with even higher lr
 all_losses_bn3 = []
@@ -87,12 +82,10 @@ for i in range(3):
     losses_bn3, val_losses_bn3, _ ,model_bn3= fit(model_bn3, train_dataloader, valid_dataloader, epochs=10, lr=5e-2)
     all_losses_bn3.append((losses_bn3, val_losses_bn3))
     
-            # Check if the current model has a lower validation loss
-    if min(val_losses_bn3) < min_val_loss:
-        min_val_loss = min(val_losses_bn3)
-        # Save best Vanilla LeNet-5 model
-        best_model_bn3 = model_bn3
-        torch.save(best_model_bn2.state_dict(), 'best_model_bn3.pth')
+
+
+best_model_bn3 = model_bn3
+torch.save(best_model_bn2.state_dict(), 'best_model_bn3.pth')
 
 # Vanilla LeNet-5 with even higher lr
 all_losses_vanilla2 = []
@@ -101,12 +94,10 @@ for i in range(3):
     losses_vanilla2, val_losses_vanilla2, _ ,model_vanilla2= fit(model_vanilla2, train_dataloader, valid_dataloader, epochs=10, lr=5e-2)
     all_losses_vanilla2.append((losses_vanilla2, val_losses_vanilla2))
     
-                # Check if the current model has a lower validation loss
-    if min(val_losses_vanilla2) < min_val_loss:
-        min_val_loss = min(val_losses_vanilla2)
+
         # Save best Vanilla LeNet-5 model
-        best_model_vanilla2 = model_vanilla2
-        torch.save(best_model_vanilla2.state_dict(), 'best_model_vanilla2.pth')
+best_model_vanilla2 = model_vanilla2
+torch.save(best_model_vanilla2.state_dict(), 'best_model_vanilla2.pth')
 
 # BatchNorm LeNet-5 using Pytorch's BatchNorm
 all_losses_stockbn = []
@@ -115,12 +106,10 @@ for i in range(3):
     losses_stockbn, val_losses_stockbn, _ ,model_stockbn= fit(model_stockbn, train_dataloader, valid_dataloader, epochs=10, lr=1e-3)
     all_losses_stockbn.append((losses_stockbn, val_losses_stockbn))
     
-                    # Check if the current model has a lower validation loss
-    if min(val_losses_stockbn) < min_val_loss:
-        min_val_loss = min(val_losses_stockbn)
-        # Save best Vanilla LeNet-5 model
-        best_model_stockbn = model_stockbn
-        torch.save(best_model_stockbn.state_dict(), 'best_model_stockbn.pth')
+
+# Save best Vanilla LeNet-5 model
+best_model_stockbn = model_stockbn
+torch.save(best_model_stockbn.state_dict(), 'best_model_stockbn.pth')
 
 
 
