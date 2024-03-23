@@ -53,7 +53,7 @@ def homemade_layernorm():
     selected_models = st.multiselect("Select models to compare", selected_models_ui)
 
     # Affichage des pertes pour les modèles sélectionnés
-    st.subheader("Losses")
+    st.subheader("Loss")
     fig_loss, ax_loss = plt.subplots()
     for model_name in selected_models:
         key = model_names.get(model_name)
@@ -65,7 +65,7 @@ def homemade_layernorm():
     st.pyplot(fig_loss)
 
     # Affichage des accuracies pour les modèles sélectionnés
-    st.subheader("Accuracies")
+    st.subheader("Accuracy")
     for model_name in selected_models:
         key = model_names.get(model_name)
         if key in accuracies_dict:

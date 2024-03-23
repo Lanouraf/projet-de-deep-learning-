@@ -8,16 +8,19 @@ from homemade_layernorm import homemade_layernorm
 def main():
     st.title("Batch and Layer Normalization")
     app_mode = st.sidebar.selectbox(
-        "Choose the experiment",
+        "Choisissez l'expérience",
         [
             "Home",
-            "Homemade Layer Normalization",
-            "homemade batch normalisation"
+            "Homemade Layer Normalisation"
         ],
     )
     if app_mode == "Home":
-        st.write("To continue select a mode in the selection box to the left.")
-    elif app_mode == "Homemade Layer Normalization":
+        st.write("Bienvenue sur l'application Streamlit de Layer Normalisation et de Batch Normalisation")
+        st.write("Cette application explore les concepts de Layer Normalisation et de Batch Normalisation.")
+        st.write("Pour continuer, veuillez sélectionner une expérience dans la barre latérale.")
+        
+    
+    elif app_mode == "Homemade Layer Normalisation":
         homemade_layernorm()
 
 if __name__ == "__main__":
