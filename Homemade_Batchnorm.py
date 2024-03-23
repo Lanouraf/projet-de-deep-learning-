@@ -21,19 +21,24 @@ def homemade_batchnormalisation():
 # Téléchargement des fichiers de loss de nos modèles déjà entrainés depuis Google Drive
    
  # Liste des IDs de vos fichiers sur Google Drive
-file_ids = ['FILE_ID_1', 'FILE_ID_2', 'FILE_ID_3','FILE_ID_3']
+    file_ids = ['11IH2ZXJ3b_tZezDk8kN3Doar2-cs5YIZ', '1HEeypE2pBz7KpogT0KW4eQNTEp7hJhSd', '1ENI0CFZjgyM9A2rW_tIg6_nAXs6531oS','1YVzklFpo5ty6ApDK-XBzdb18zuogkQsY']
 
  # Liste des noms de fichiers de sortie
-output_filenames = ['OUTPUT_FILENAME_1.npy', 'OUTPUT_FILENAME_2.npy', 'OUTPUT_FILENAME_3.npy','OUTPUT_FILENAME_3.npy']
+    output_filenames = ['losses_vanilla.npy', 'losses_bn.npy', 'val_losses_vanilla.npy','val_losses_bn.npy']
 
  # Boucle pour télécharger chaque fichier de loss depuis Google Drive
-for file_id, output_filename in zip(file_ids, output_filenames):
+    for file_id, output_filename in zip(file_ids, output_filenames):
      url = f'https://drive.google.com/file/d/{file_id}/view?usp=sharing'
-     gdd.download(url, output_filename, quiet=False)
+     dest_path = './' + output_filename
+     gdd.download_file_from_google_drive(file_id=file_id, dest_path=dest_path, overwrite=True, showsize=True)
 
- # Maintenant, vous pouvez charger les fichiers .npy
-data = []
-for output_filename in output_filenames:
-    data.append(np.load(output_filename))
-    
+# Charger les fichiers de loss
+    losses_vanilla = np.load('losses_vanilla.npy')
+    losses_bn = np.load('losses_bn.npy')
+    val_losses_vanilla = np.load('val_losses_vanilla.npy')
+    val_losses_bn = np.load('val_losses_bn.npy')
+
+    st.write(val_losses_bn)
+    if losses_vanilla is not None and losses_bn is not None and val_losses_vanilla is not None and val_losses_bn is not None:
+        st.write("Les fichiers de loss ont été téléchargés avec succès.")
     
