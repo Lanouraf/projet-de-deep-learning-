@@ -14,41 +14,41 @@ hidden1 = 128
 hidden2 = 64
 output_shape = 1
 
-#model = BagOfWordsClassifier(vocab_size, hidden1, hidden2, output_shape)
-#model2=BagOfWordsClassifier(vocab_size, hidden1, hidden2, output_shape)
-#model3=BagOfWordsClassifierLayerHM(vocab_size, hidden1, hidden2, output_shape)
 criterion = nn.BCELoss()
-model=BagOfWordsClassifierBatchNorm(vocab_size, hidden1, hidden2, output_shape)
+
+model = BagOfWordsClassifier(vocab_size, hidden1, hidden2, output_shape)
+model2=BagOfWordsClassifier(vocab_size, hidden1, hidden2, output_shape)
+model3=BagOfWordsClassifierLayerHM(vocab_size, hidden1, hidden2, output_shape)
+model4=BagOfWordsClassifierBatchNorm(vocab_size, hidden1, hidden2, output_shape)
+
 optimizer = optim.Adam(model.parameters(), lr=0.001)
-BOW_BN,loss=LNtrain(model,optimizer,criterion)
-torch.save(BOW_BN.state_dict(), 'BOW_BN.pth')
-losses_dict = {
-    'BOW_BN': loss}
-torch.save(losses_dict, 'loss_BN.pth')
+optimizer2 = optim.Adam(model2.parameters(), lr=0.001)
+optimizer3 = optim.Adam(model3.parameters(), lr=0.001)
+optimizer4 = optim.Adam(model4.parameters(), lr=0.001)
 
-#optimizer = optim.Adam(model.parameters(), lr=0.001)
-#optimizer2 = optim.Adam(model2.parameters(), lr=0.001)
-#optimizer3 = optim.Adam(model3.parameters(), lr=0.001)
-
-#BOW_LN,loss=LNtrain(model,optimizer,criterion)
-#BOW,loss2=LNtrain(model2,optimizer2,criterion)
-#BOW_HM_LN,loss3=LNtrain(model3,optimizer3,criterion)
+BOW_LN,loss=LNtrain(model,optimizer,criterion)
+BOW,loss2=LNtrain(model2,optimizer2,criterion)
+BOW_HM_LN,loss3=LNtrain(model3,optimizer3,criterion)
+BOW_BN,loss4=LNtrain(model4,optimizer4,criterion)
 
 # Créer un dictionnaire de pertes pour chaque modèle
-#losses_dict = {
-#    'BOW': loss2,
-#    'BOW_LN': loss,
-#    'BOW_HM_LN': loss3
-#}
+losses_dict = {
+    'BOW': loss2,
+    'BOW_LN': loss,
+    'BOW_HM_LN': loss3
+}
 
-# Convertir le dictionnaire des pertes en DataFrame
-#losses_df = pd.DataFrame(losses_dict.items(), columns=['Model', 'Loss'])
+losses_dict_BN = {
+    'BOW_BN': loss}
 
-# Sauvegarder le DataFrame dans un fichier CSV
-#losses_df.to_csv('losses.csv', index=False)
 
-#torch.save(BOW.state_dict(), 'BOW.pth')
-#torch.save(BOW_LN.state_dict(), 'BOW_LN.pth')
-#torch.save(BOW_HM_LN.state_dict(), 'BOW_HM_LN.pth')
+torch.save(losses_dict_BN, 'loss_BN.pth')
+torch.save(losses_dict, 'losses.pth')
+
+
+torch.save(BOW.state_dict(), 'BOW.pth')
+torch.save(BOW_LN.state_dict(), 'BOW_LN.pth')
+torch.save(BOW_HM_LN.state_dict(), 'BOW_HM_LN.pth')
+torch.save(BOW_BN.state_dict(), 'BOW_BN.pth')
 
 
