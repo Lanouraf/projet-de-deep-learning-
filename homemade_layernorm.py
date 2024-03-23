@@ -32,8 +32,10 @@ def homemade_layernorm():
     train_dataset, train_loader, test_dataset, test_loader = prep_data()
     
     # Chargement des pertes depuis le fichier losses.csv
-    losses_df = pd.read_csv("losses.csv")
-    
+    url = f'https://drive.google.com/file/d/1lESMtwwy_qzfWtpfpGDQYKzLOkABrIyp/view?usp=sharing'
+    dest_path = './losses.pth'
+    gdd.download_file_from_google_drive(file_id='1lESMtwwy_qzfWtpfpGDQYKzLOkABrIyp', dest_path=dest_path, overwrite=True, showsize=True)
+    losses=torch.load('losses.pth')
     # Lecture des accuracies depuis le fichier accuracies.csv dans votre répertoire Git
     accuracies_df = pd.read_csv("accuracies.csv", header=None, index_col=0)  # Charger sans utiliser la première colonne comme index
     
@@ -53,16 +55,15 @@ def homemade_layernorm():
     selected_models = st.multiselect("Select models to compare", selected_models_ui)
 
     st.subheader("Loss")
+    fig_loss, ax_loss = plt.subplots()
     for model_name in selected_models:
         key = model_names.get(model_name)
-        if key in losses_df['Model'].values:
-            loss_values = json.loads(losses_df[losses_df['Model'] == key]['Loss'].iloc[0])
-            plt.plot(loss_values, label=model_name)
-
-    plt.xlabel('Epochs')
-    plt.ylabel('Loss')
-    plt.legend()
-    st.pyplot()
+        if key in losses:
+            ax_loss.plot(losses[key], label=model_name)
+    ax_loss.set_xlabel("Epoch")
+    ax_loss.set_ylabel("Loss")
+    ax_loss.legend()
+    st.pyplot(fig_loss)
 
     # Affichage des accuracies pour les modèles sélectionnés
     st.subheader("Accuracy")

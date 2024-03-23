@@ -1,6 +1,7 @@
 import torch.nn as nn
 import torch
 from HOMEMADE_LN import LayerNorm
+
 class BagOfWordsClassifier(nn.Module):
         def __init__(self, vocab_size, hidden1, hidden2, out_shape):
             super(BagOfWordsClassifier, self).__init__()

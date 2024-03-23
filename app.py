@@ -3,8 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import torch
-#from homemade_layernorm import homemade_layernorm
-from hm import homemade_layernorm
+from homemade_layernorm import homemade_layernorm
 
 def main():
     st.title("Batch and Layer Normalization")
