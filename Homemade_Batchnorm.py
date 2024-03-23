@@ -1,6 +1,5 @@
 import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
 from google_drive_downloader import GoogleDriveDownloader as gdd
 import torch
 from torchvision import datasets, transforms
@@ -51,7 +50,7 @@ def homemade_batchnormalisation():
     ...
     
     
-    st.write("Nous voulons comparer les performances entre la batchnormalisation implémenté dans pytorch et notre batch normalisation implémentée par nous même.")
+    st.write("Nous voulons comparer les performances entre la batch normalisation implémentée dans pytorch et notre batch normalisation implémentée par nous même.")
     st.write("Nous utilisons le jeu de données MNIST pour entraîner des modèles suivant l'architecture LeNet-5 (Yann LeCun et al. (1998)) avec et sans notre batchnormalisation.")
     
     descriptionMNISt()
