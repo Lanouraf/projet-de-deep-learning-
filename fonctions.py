@@ -106,3 +106,47 @@ def accuracy(preds, y):
     """
     preds = torch.argmax(preds, dim = 1)
     return sum(preds == y) / len(preds)
+
+
+
+def plot_compare(losses_a, val_losses_a, losses_b,val_losses_b ,legend_a="model a", legend_b="model b", save_to="out"):
+    """
+    Draws plots comparing models a and b from their training and validation losses
+
+    :param losses_a: Training losses for model a
+    :param val_losses_a: Validation losses for model a
+    :param losses_b: Training losses for model b
+    :param val_losses_b: Validation losses for model b
+    :param legend_a: Name of model a, to be shown in the plot's legend
+    :param legend_b: Name of model b, to be shown in the plot's legend
+    :param save_to: If a file name is specified, plots are saved to SVG files
+    """
+
+    f = plt.figure()
+    for j, (epoch_losses_a, epoch_losses_b) in enumerate(zip(losses_a, losses_b)):
+        plt_a = plt.scatter(range(len(epoch_losses_a)), [losses[-1] for losses in epoch_losses_a], marker='o',
+                            c='tab:blue', alpha=0.3)
+        plt.plot(range(len(epoch_losses_a)), [losses[-1] for losses in epoch_losses_a], '-', color='tab:blue')
+        plt_b = plt.scatter(range(len(epoch_losses_b)), [losses[-1] for losses in epoch_losses_b], marker='o',
+                            c='tab:orange', alpha=0.3)
+        plt.plot(range(len(epoch_losses_a)), [losses[-1] for losses in epoch_losses_b], '-', color='tab:orange')
+    plt.title("Training losses")
+    plt.xlabel("Epochs")
+    plt.ylabel("Loss")
+    plt.legend((plt_a, plt_b), (legend_a, legend_b))
+    if save_to is not None:
+        plt.savefig(save_to + '.svg')
+        
+
+    f = plt.figure()
+    for j, (epoch_losses_a, epoch_losses_b) in enumerate(zip(val_losses_a, val_losses_b)):
+        plt_a = plt.scatter(range(len(epoch_losses_a)), epoch_losses_a, marker='o', c='tab:blue', alpha=0.3)
+        plt.plot(range(len(epoch_losses_a)), epoch_losses_a, '-', color='tab:blue')
+        plt_b = plt.scatter(range(len(epoch_losses_b)), epoch_losses_b, marker='o', c='tab:orange', alpha=0.3)
+        plt.plot(range(len(epoch_losses_b)), epoch_losses_b, '-', color='tab:orange')
+    plt.title("Validation losses")
+    plt.xlabel("Epochs")
+    plt.ylabel("Loss")
+    plt.legend((plt_a, plt_b), (legend_a + '-val', legend_b + '-val'))
+    if save_to is not None:
+        plt.savefig(save_to + '_val.svg')
