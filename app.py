@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import torch
 from homemade_layernorm import homemade_layernorm
+from Homemade_Batchnorm import homemade_batchnormalisation
 
 def main():
     st.title("Batch and Layer Normalization")
@@ -11,7 +12,8 @@ def main():
         "Choisissez l'expérience",
         [
             "Home",
-            "Homemade Layer Normalisation"
+            "Homemade Layer Normalisation",
+            "home_made_batchnorm"
         ],
     )
     if app_mode == "Home":
@@ -22,6 +24,8 @@ def main():
     
     elif app_mode == "Homemade Layer Normalisation":
         homemade_layernorm()
+    elif app_mode == "home_made_batchnorm":
+        homemade_batchnormalisation()
 
 if __name__ == "__main__":
     main()
