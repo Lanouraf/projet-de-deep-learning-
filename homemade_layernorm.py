@@ -1,3 +1,18 @@
+"""
+1. Définition de la fonction 'homemade_layernorm':
+   - Cette fonction crée une application Streamlit pour visualiser les performances des modèles de classification de sentiment.
+   - Elle affiche les données de review, les instructions sur le but de la page et les modèles entraînés.
+
+2. Chargement des données et des modèles :
+   - Les données de review sont chargées à partir d'un fichier CSV.
+   - Trois modèles de classification de sentiment sont chargés : Bag of Words simple, Bag of Words avec Layer Norm de PyTorch, et Bag of Words avec Layer Norm implémentée à la main.
+   - Les pertes et les accuracies des modèles sont également chargées à partir de fichiers.
+
+3. Affichage des graphiques et des informations :
+   - Un graphique des pertes est affiché pour chaque modèle sélectionné.
+   - Les accuracies sont affichées pour chaque modèle sélectionné.
+"""
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -5,10 +20,8 @@ import matplotlib.pyplot as plt
 from google_drive_downloader import GoogleDriveDownloader as gdd
 from Sequences import prep_data
 import torch
-from LNtrain import LNtest
 from LNModule import BagOfWordsClassifier, BagOfWordsClassifierLayer, BagOfWordsClassifierLayerHM
 from DATALOAD import data_review
-import json
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
