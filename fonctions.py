@@ -124,12 +124,12 @@ def plot_compare(losses_a, val_losses_a, losses_b,val_losses_b ,legend_a="model 
 
     f = plt.figure()
     for j, (epoch_losses_a, epoch_losses_b) in enumerate(zip(losses_a, losses_b)):
-        plt_a = plt.scatter(range(len(epoch_losses_a)), [losses[-1] for losses in epoch_losses_a], marker='o',
+        plt_a = plt.scatter(range(len(epoch_losses_a)), [losses for losses in epoch_losses_a], marker='o',
                             c='tab:blue', alpha=0.3)
-        plt.plot(range(len(epoch_losses_a)), [losses[-1] for losses in epoch_losses_a], '-', color='tab:blue')
-        plt_b = plt.scatter(range(len(epoch_losses_b)), [losses[-1] for losses in epoch_losses_b], marker='o',
+        plt.plot(range(len(epoch_losses_a)), [losses for losses in epoch_losses_a], '-', color='tab:blue')
+        plt_b = plt.scatter(range(len(epoch_losses_b)), [losses for losses in epoch_losses_b], marker='o',
                             c='tab:orange', alpha=0.3)
-        plt.plot(range(len(epoch_losses_a)), [losses[-1] for losses in epoch_losses_b], '-', color='tab:orange')
+        plt.plot(range(len(epoch_losses_a)), [losses for losses in epoch_losses_b], '-', color='tab:orange')
     plt.title("Training losses")
     plt.xlabel("Epochs")
     plt.ylabel("Loss")
