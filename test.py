@@ -117,20 +117,19 @@ torch.save(best_model_stockbn.state_dict(), 'best_model_stockbn.pth')
 
 # Store loss values
 
-# Store validation loss values
-np.save('val_losses_bn3.npy', val_losses_bn3)
-np.save('val_losses_vanilla2.npy', val_losses_vanilla2)
-np.save('val_losses_stockbn.npy', val_losses_stockbn)
-np.save('val_losses_bn2.npy', val_losses_bn2)
-np.save('val_losses_bn.npy', val_losses_bn)
+np.save('valeur loss-models-batch\losses_bn.npy', val_losses_bn3)
+np.save('valeur loss-models-batch\\val_losses_vanilla2.npy', val_losses_vanilla2)
+np.save('valeur loss-models-batch\\val_losses_stockbn.npy', val_losses_stockbn)
+np.save('valeur loss-models-batch\\val_losses_bn2.npy', val_losses_bn2)
+np.save('valeur loss-models-batch\\val_losses_bn.npy', val_losses_bn)
 
 #store training losses values
-np.save('losses_bn3.npy', losses_bn3)
-np.save('losses_vanilla2.npy', losses_vanilla2)
-np.save('losses_stockbn.npy', losses_stockbn)
-np.save('losses_bn2.npy', losses_bn2)
-np.save('losses_bn.npy', losses_bn)
-np.save('losses_vanilla.npy', losses_vanilla)
+np.save('valeur loss-models-batch\losses_bn3.npy', losses_bn3)
+np.save('valeur loss-models-batch\losses_vanilla2.npy', losses_vanilla2)
+np.save('valeur loss-models-batch\losses_stockbn.npy', losses_stockbn)
+np.save('valeur loss-models-batch\losses_bn2.npy', losses_bn2)
+np.save('valeur loss-models-batch\losses_bn.npy', losses_bn)
+np.save('valeur loss-models-batch\losses_vanilla.npy', losses_vanilla)
 
 # Plot results
 # ---------------------------------------------
