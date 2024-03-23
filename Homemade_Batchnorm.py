@@ -1,12 +1,15 @@
 import streamlit as st
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from google_drive_downloader import GoogleDriveDownloader as gdd
 import torch
+from torchvision import datasets, transforms
+from torch.utils.data import DataLoader
 import os
 import time
 from fonctions import plot_compare  
+from fonctions import test
+from batch.architecture import LeNet, LeNetBN , LeNetStockBN
 
 
 
@@ -35,6 +38,18 @@ La tâche consiste à classer ces images dans l'une des 10 classes. Il s'agit d'
 
 
 def homemade_batchnormalisation():
+    """
+    Cette fonction réalise une comparaison des performances entre la batchnormalisation implémentée dans PyTorch et notre batch normalisation implémentée par nous-même.
+    Elle utilise le jeu de données MNIST pour entraîner des modèles suivant l'architecture LeNet-5 (Yann LeCun et al. (1998)) avec et sans notre batchnormalisation.
+    
+    La fonction télécharge les fichiers de loss nécessaires pour l'expérience et les charge en mémoire.
+    Ensuite, elle affiche un graphique comparant les courbes de perte d'entraînement et de perte de validation pour les modèles LeNet-5 avec et sans BatchNorm.
+    
+    """
+    
+    # Code de la fonction
+    ...
+    
     
     st.write("Nous voulons comparer les performances entre la batchnormalisation implémenté dans pytorch et notre batch normalisation implémentée par nous même.")
     st.write("Nous utilisons le jeu de données MNIST pour entraîner des modèles suivant l'architecture LeNet-5 (Yann LeCun et al. (1998)) avec et sans notre batchnormalisation.")
@@ -52,14 +67,14 @@ def homemade_batchnormalisation():
     placeholder = st.empty()
     
     # Vérifier si les fichiers de loss existent déjà
-    if not os.path.exists('valeur loss-models-batch//losses_vanilla.npy') or not os.path.exists('valeur loss-models-batch//losses_vanilla.npy') or not os.path.exists('valeur loss-models-batch//losses_vanilla.npy') or not os.path.exists('valeur loss-models-batch//losses_vanilla.npy'):
+    if not os.path.exists('valeur loss-models-batch//losses_stockbn.npy') or not os.path.exists('valeur loss-models-batch//losses_stockbn.npy') or not os.path.exists('valeur loss-models-batch//losses_bn.npy') or not os.path.exists('valeur loss-models-batch//val_losses_bn.npy'):
         # Télécharger les fichiers de loss
         placeholder.text("Les fichiers de loss n'ont pas été trouvés. Téléchargement en cours...")
        # Liste des IDs de vos fichiers sur Google Drive
-        file_ids = ['11IH2ZXJ3b_tZezDk8kN3Doar2-cs5YIZ', '1HEeypE2pBz7KpogT0KW4eQNTEp7hJhSd', '1ENI0CFZjgyM9A2rW_tIg6_nAXs6531oS','1YVzklFpo5ty6ApDK-XBzdb18zuogkQsY']
+        file_ids = ['19dkl_J39vGJAIVhhG51IOjJavhkP4_fr', '1HEeypE2pBz7KpogT0KW4eQNTEp7hJhSd', '1TIkKrY9uV-oWjYHQE4zvuk4kfpLJgwdV','1YVzklFpo5ty6ApDK-XBzdb18zuogkQsY']
 
         # Liste des noms de fichiers de sortie
-        output_filenames = ['losses_vanilla.npy', 'losses_bn.npy', 'val_losses_vanilla.npy','val_losses_bn.npy']
+        output_filenames = ['losses_stockbn.npy', 'losses_bn.npy', 'val_losses_stockbn.npy','val_losses_bn.npy']
 
         # Boucle pour télécharger chaque fichier de loss depuis Google Drive
         for file_id, output_filename in zip(file_ids, output_filenames):
@@ -73,26 +88,88 @@ def homemade_batchnormalisation():
         placeholder.text("Les fichiers de loss existent déjà.")
 
     # Charger les fichiers de loss
-    losses_vanilla = np.load('valeur loss-models-batch//losses_vanilla.npy')
+    losses_stockbn = np.load('valeur loss-models-batch//losses_stockbn.npy')
     losses_bn = np.load('valeur loss-models-batch//losses_bn.npy')
-    val_losses_vanilla = np.load('valeur loss-models-batch//val_losses_vanilla.npy')
+    val_losses_stockbn = np.load('valeur loss-models-batch//val_losses_stockbn.npy')
     val_losses_bn = np.load('valeur loss-models-batch//val_losses_bn.npy')
 
-    if losses_vanilla is not None and losses_bn is not None and val_losses_vanilla is not None and val_losses_bn is not None:
+    if losses_stockbn is not None and losses_bn is not None and val_losses_stockbn is not None and val_losses_bn is not None:
         placeholder.text("Les fichiers de loss ont été téléchargés avec succès.")
-        time.sleep(7)
+        time.sleep(5)
         placeholder.empty()
         
-    all_losses_vanilla = []
-    all_losses_vanilla.append((losses_vanilla, val_losses_vanilla))
+    all_losses_stockbn = []
+    all_losses_stockbn.append((losses_stockbn, val_losses_stockbn))
 
     all_losses_bn = []
     all_losses_bn.append((losses_bn, val_losses_bn))
     
-    plot_compare(all_losses_vanilla, all_losses_bn,mode="streamlit", legend_a="Vanilla LeNet-5", legend_b="LeNet-5 with BatchNorm", save_to="result_plot_batch/Vanilla_vs_BatchNorm")
+    plot_compare(all_losses_stockbn, all_losses_bn,mode="streamlit", legend_a="LeNet-5 with Pytorch-BatchNorm", legend_b="LeNet-5 with Homemade-BatchNorm", save_to="result_plot_batch/StockBN_vs_BatchNorm")
+    
+    st.write("Le graphique ci-dessus compare les courbes de perte d'entraînement et de perte de validation pour les modèles LeNet-5 avec la batchnorm Pytorch et la homemade BatchNorm.")
+    st.write("On peut remarquer que la batchnorm Pytorch à des performances similaires à notre batchnorm homemade, cequi veut dire que notre implementation est efficace.")
+    #on recupères les modèles entrainées depuis google drive et on calcule la précision sur le jeu de test
+    
+    #on recupère les données de test 
+    transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5), (0.5))])
+    test1 = datasets.MNIST(root="dataset", train=False, transform=transform, download=True)
+    test_dataloader = DataLoader(test1, batch_size=512, shuffle=False)
     
     
+    placeholder = st.empty()
+    
+    # Vérifier si les fichiers de loss existent déjà
+    if not os.path.exists('batch/modèles_stockbn_entrainé.pth') or not os.path.exists('batch/modèle_bn_entrainé.pth') :
+        # Télécharger les fichiers de loss
+        placeholder.text("Les fichiers de modèles n'ont pas été trouvés. Téléchargement en cours...")
+       # Liste des IDs de vos fichiers sur Google Drive
+        file_ids = ['1x9EpK8hLu4obAFoy14_tN2OdsKMB_-xq', '1_LdtVZNoiwb2BzfqI6yjSAbOxDGMRTny']
+
+        # Liste des noms de fichiers de sortie
+        output_filenames = ['modèles_stockbn_entrainé.pth', 'modèle_bn_entrainé.pth']
+
+        # Boucle pour télécharger chaque fichier de loss depuis Google Drive
+        for file_id, output_filename in zip(file_ids, output_filenames):
+            url = f'https://drive.google.com/file/d/{file_id}/view?usp=sharing'
+            dest_path = './batch/' + output_filename
+         
+            gdd.download_file_from_google_drive(file_id=file_id, dest_path=dest_path, overwrite=True, showsize=True)
+    
+    
+    else:
+        placeholder.text("Les fichiers de modèles existent déjà.")
         
+    #charger les modèles 
+    modèle_stockbn=LeNetStockBN() 
+    modèles_stockbn_entrainé=torch.load('batch/modèles_stockbn_entrainé.pth')
+    modèle_stockbn.load_state_dict(modèles_stockbn_entrainé)
+    
+    
+    modèle_bn=LeNetBN()
+    modèle_bn_entrainé=torch.load('batch/modèle_bn_entrainé.pth')
+    modèle_bn.load_state_dict(modèle_bn_entrainé)
+    
+    # Vérifier si les modèles ont été importés avec succès
+    if modèles_stockbn_entrainé is not None and modèle_bn_entrainé is not None:
+        placeholder.text("Les modèles ont été importés avec succès.")
+        time.sleep(5)
+        placeholder.empty()
+    else:
+        placeholder.text("Erreur lors de l'importation des modèles.")
+        
+    # Calculer la précision sur le jeu de test
+    _, testacc_stockbn = test(modèle_stockbn, test_dataloader)
+    _, testacc_bn = test(modèle_bn, test_dataloader)
+    
+    st.write("La précision du modèle LeNet-5 avec BatchNorm sur le jeu de test est de {:.2f}%.".format(testacc_bn * 100))
+    st.write("La précision du modèle LeNet-5 sans BatchNorm sur le jeu de test est de {:.2f}%.".format(testacc_stockbn * 100))
+    
+    
+    
+    
+    
+     
+       
         
 
     

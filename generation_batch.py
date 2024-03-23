@@ -1,8 +1,10 @@
 """
-This script trains multiple LeNet-5 models with different configurations and saves the loss values.
-It uses the MNIST dataset from torchvision and torch.utils.data.DataLoader for data loading.
-The trained models include Vanilla LeNet-5, LeNet-5 with Batch Normalization, and LeNet-5 with PyTorch's BatchNorm.
-The loss values are saved in separate numpy files for each model configuration.
+Ce script entraîne plusieurs modèles LeNet-5 avec différentes configurations et enregistre les valeurs de perte.
+Il utilise l'ensemble de données MNIST de torchvision et torch.utils.data.DataLoader pour le chargement des données.
+Les modèles entraînés comprennent LeNet-5 classique, LeNet-5 avec normalisation de lot (Batch Normalization) et LeNet-5 avec BatchNorm de PyTorch.
+Les valeurs de perte sont enregistrées dans des fichiers numpy séparés pour chaque configuration de modèle.
+Ce script peut prendre du temps à s'exécuter en raison de l'entraînement de plusieurs modèles et du chargement des données.
+Les résultats de l'exécution de ce script ont été sauvegardés sur un Google Drive.
 """
 
 
