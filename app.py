@@ -11,7 +11,8 @@ def main():
         "Choose the experiment",
         [
             "Home",
-            "Homemade Layer Normalization"
+            "Homemade Layer Normalization",
+            "homemade batch normalisation"
         ],
     )
     if app_mode == "Home":
