@@ -6,6 +6,7 @@ from google_drive_downloader import GoogleDriveDownloader as gdd
 import torch
 import os
 import time
+from fonctions import plot_compare  
 
 
 
@@ -81,6 +82,16 @@ def homemade_batchnormalisation():
         placeholder.text("Les fichiers de loss ont été téléchargés avec succès.")
         time.sleep(7)
         placeholder.empty()
+        
+    all_losses_vanilla = []
+    all_losses_vanilla.append((losses_vanilla, val_losses_vanilla))
+
+    all_losses_bn = []
+    all_losses_bn.append((losses_bn, val_losses_bn))
+    
+    plot_compare(all_losses_vanilla, all_losses_bn,mode="streamlit", legend_a="Vanilla LeNet-5", legend_b="LeNet-5 with BatchNorm", save_to="result_plot_batch/Vanilla_vs_BatchNorm")
+    
+    
         
         
 
