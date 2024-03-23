@@ -28,41 +28,6 @@ train_dataloader = DataLoader(train, batch_size = 256, shuffle = True)
 valid_dataloader = DataLoader(valid, batch_size = 512, shuffle = False)
 
 
-# List of file names
-file_names = ['val_losses_bn3.npy', 'val_losses_vanilla2.npy', 'val_losses_stockbn.npy', 
-              'val_losses_bn2.npy', 'val_losses_bn.npy', 'losses_bn3.npy', 
-              'losses_vanilla2.npy', 'losses_stockbn.npy', 'losses_bn2.npy', 
-              'losses_bn.npy', 'losses_vanilla.npy']
-
-
-all_losses_bn3 = []
-all_losses_vanilla2 = []
-all_losses_stockbn = []
-all_losses_bn2 = []
-all_losses_bn = []
-val_losses_bn3 = []
-val_losses_vanilla2 = []
-val_losses_stockbn = []
-val_losses_bn2 = []
-val_losses_bn = []
-losses_bn3 = []
-losses_vanilla2 = []
-losses_stockbn = []
-losses_bn2 = []
-losses_bn = []
-losses_vanilla = []
-
-variables = [val_losses_bn3, val_losses_vanilla2, val_losses_stockbn, 
-             val_losses_bn2, val_losses_bn, losses_bn3, 
-             losses_vanilla2, losses_stockbn, losses_bn2, 
-             losses_bn, losses_vanilla]
-
-for i in range(len(file_names)):
-    if os.path.isfile(file_names[i]):
-        # Load the loss values if the file exists
-        variables[i] = np.load(file_names[i])
-    else:
-        pass
 # Train models
 # ---------------------------------------------
 
