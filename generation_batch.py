@@ -10,7 +10,7 @@ import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
-from fonctions import fit , testmod
+from fonctions import fit , test
 from batch.architecture import LeNet, LeNetBN, LeNetStockBN
 import numpy as np
 import os
@@ -23,11 +23,11 @@ transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5
 
 train = datasets.MNIST(root="dataset", train=True, transform=transform, download=True)
 valid = datasets.MNIST(root="dataset", train=False, transform=transform, download=True)
-test = datasets.MNIST(root="dataset", train=False, transform=transform, download=True)
+test1 = datasets.MNIST(root="dataset", train=False, transform=transform, download=True)
 
 train_dataloader = DataLoader(train, batch_size=256, shuffle=True)
 valid_dataloader = DataLoader(valid, batch_size=512, shuffle=False)
-test_dataloader = DataLoader(test, batch_size=512, shuffle=False)
+test_dataloader = DataLoader(test1, batch_size=512, shuffle=False)
 
 
 # Train models
@@ -42,10 +42,10 @@ for i in range(3):
     model_vanilla = LeNet()
     losses_vanilla, val_losses_vanilla, acc_vanilla ,model_vanilla = fit(model_vanilla, train_dataloader, valid_dataloader,
                                                           epochs=10, lr=1e-3)
-    testloss_vanilla, testacc_vanilla = testmod(model_vanilla, test_dataloader)
+    testloss_vanilla, testacc_vanilla = test(model_vanilla, test_dataloader)
     all_losses_vanilla.append((losses_vanilla, val_losses_vanilla))
     all_acc_vanilla.append(acc_vanilla)
-print("Vanilla LeNet-5", testloss_vanilla, testacc_vanilla)
+
      
     
 

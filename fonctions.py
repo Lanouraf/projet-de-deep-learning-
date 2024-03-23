@@ -98,7 +98,7 @@ def fit(model, train_dataloader, valid_dataloader, epochs, loss_fn=nn.CrossEntro
 
 
 
-def testmod(model, test_dataloader, loss_fn=nn.CrossEntropyLoss()):
+def test(model, test_dataloader, loss_fn=nn.CrossEntropyLoss()):
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     model.to(device)
     model.eval()
@@ -115,10 +115,9 @@ def testmod(model, test_dataloader, loss_fn=nn.CrossEntropyLoss()):
 
             accuracy_batch += accuracy(pred, yb).item()
         test_loss /= len(test_dataloader)
-        accuracy = accuracy_batch / len(test_dataloader)
+        accuracie = accuracy_batch / len(test_dataloader)
 
-    return test_loss, accuracy
-
+    return test_loss, accuracie
 
 def accuracy(preds, y):
     """
