@@ -8,6 +8,8 @@ import torch
 from LNtrain import LNtest
 from LNModule import BagOfWordsClassifier, BagOfWordsClassifierLayer, BagOfWordsClassifierLayerHM
 from DATALOAD import data_review
+import gdown
+
 
 def homemade_layernorm():
     st.title("Homemade Layer Normalization")
@@ -27,12 +29,14 @@ def homemade_layernorm():
     st.write("- Un modèle qui applique la layer norm implémentée à la main")
     
     train_dataset, train_loader, test_dataset, test_loader = prep_data()
-    
-    # Téléchargement des fichiers depuis Google Drive
-    gdd.download_file_from_google_drive(file_id='1lESMtwwy_qzfWtpfpGDQKzLOkABrIyp', dest_path='/losses.pth')
-    
+    # URL de téléchargement direct depuis Google Drive
+    url = 'https://drive.google.com/file/d/1lESMtwwy_qzfWtpfpGDQYKzLOkABrIyp'
+    # Chemin de destination du fichier téléchargé
+    dest_path = './losses.pth'
+    gdown.download(url, dest_path, quiet=False)
+
     # Chargement des pertes depuis le fichier losses.pth
-    losses = torch.load('/losses.pth')
+    losses = torch.load(dest_path)
     
     # Lecture des accuracies depuis le fichier accuracies.csv dans votre répertoire Git
     accuracies_df = pd.read_csv("accuracies.csv", header=None, index_col=0)  # Charger sans utiliser la première colonne comme index
