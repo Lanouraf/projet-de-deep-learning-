@@ -25,7 +25,7 @@ Chaque classe de modèle implémente une architecture spécifique avec différen
 
 import torch.nn as nn
 import torch
-from HOMEMADE_LN import LayerNorm
+from LN_HOMEMADE_LN import LayerNorm
 
 class BagOfWordsClassifier(nn.Module):
     """

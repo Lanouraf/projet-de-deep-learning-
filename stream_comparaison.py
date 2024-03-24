@@ -20,5 +20,3 @@ def comparaison():
         comparaison_bag_of_words()
     elif task == "Thomas":
         comparaison_thomas()
-    elif task == "FF":
-        comparaison_ff()
