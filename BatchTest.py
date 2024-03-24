@@ -1,10 +1,10 @@
 import os
-from batch.architecture import LeNet, LeNetBN, LeNetStockBN, LeNetLayerNorm
+from Batcharchitecture import LeNet, LeNetBN, LeNetStockBN, LeNetLayerNorm
 from google_drive_downloader import GoogleDriveDownloader as gdd
 import torch
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
-from fonctions import test
+from Batchfonctions import test
 
 #on recupère les données de test 
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5), (0.5))])

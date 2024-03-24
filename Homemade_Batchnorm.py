@@ -6,9 +6,9 @@ from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 import os
 import time
-from fonctions import plot_compare  
-from fonctions import test
-from batch.architecture import LeNet, LeNetBN , LeNetStockBN
+from Batchfonctions import plot_compare  
+from Batchfonctions import test
+from Batcharchitecture import LeNet, LeNetBN , LeNetStockBN
 from batch.BatchNorm import BatchNorm1D, BatchNorm2D
 
 
