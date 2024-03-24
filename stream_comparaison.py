@@ -10,11 +10,11 @@ def comparaison():
 
     # Section pour choisir la tâche
     st.subheader("Choix de la tâche")
-    task = st.selectbox("Sélectionnez la tâche", ["Bag of Words", "Thomas"])
+    task = st.selectbox("Sélectionnez la tâche", ["Bag of Words", "Lenet-5"])
 
     # Section pour afficher les datasets et les performances des modèles
     st.subheader("Comparaison des performances")
     if task == "Bag of Words":
         comparaison_bag_of_words()
-    elif task == "Thomas":
-        comparaison_thomas()
+    elif task == "Lenet-5":
+        comparaison_Lenet()

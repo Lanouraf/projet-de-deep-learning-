@@ -12,7 +12,7 @@ import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
-from Batchfonctions import fit , test
+from BNfonctions import fit , test
 from batch.Batcharchitecture import LeNet, LeNetBN, LeNetStockBN , LeNetLayerNorm
 import numpy as np
 import os

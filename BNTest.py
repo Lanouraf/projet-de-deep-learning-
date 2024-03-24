@@ -23,7 +23,7 @@ from google_drive_downloader import GoogleDriveDownloader as gdd
 import torch
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
-from Batchfonctions import test
+from BNfonctions import test
 
 #on recupère les données de test 
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5), (0.5))])

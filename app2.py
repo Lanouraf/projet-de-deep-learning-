@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import torch
 from stream_homemade_layernorm import homemade_layernorm
-from Homemade_Batchnorm import homemade_batchnormalisation
+from Stream_Homemade_Batchnorm import homemade_batchnormalisation
 
 def main():
     st.title("Batch and Layer Normalization")

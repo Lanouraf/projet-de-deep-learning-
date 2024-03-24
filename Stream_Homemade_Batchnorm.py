@@ -6,8 +6,8 @@ from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 import os
 import time
-from Batchfonctions import plot_compare  
-from Batchfonctions import test
+from BNfonctions import plot_compare  
+from BNfonctions import test
 
 
 
