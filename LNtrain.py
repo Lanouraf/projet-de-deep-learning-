@@ -4,8 +4,6 @@ Il utilise les bibliothèques PyTorch pour la création et l'entraînement des m
 Les principales fonctions incluses sont LNtrain, qui entraîne un modèle avec Layer Normalization, et LNtest, qui évalue la performance du modèle sur un ensemble de données de test.
 Ces fonctions sont conçues pour être utilisées dans le contexte de l'apprentissage de réseaux de neurones pour des tâches de classification.
 """
-
-
 from tqdm import tqdm, tqdm_notebook
 from Sequences import prep_data
 import torch
