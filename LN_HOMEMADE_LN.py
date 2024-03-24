@@ -9,6 +9,7 @@ class LayerNorm(nn.Module):
         features (int): Number of features in the input tensor.
         eps (float, optional): Epsilon value to prevent division by zero. Default is 1e-6.
     """
+    
     def __init__(self, features, eps=1e-6):
         super(LayerNorm, self).__init__()
         self.gamma = nn.Parameter(torch.ones(features))  # Learnable scale parameter
