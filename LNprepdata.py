@@ -1,15 +1,10 @@
 """
-LN_dataloader.py
-
 This file contains functions and classes for loading and preparing data for sentiment classification using Layer Normalization.
 
 Functions:
     - data_review(): Loads the home data containing reviews and labels.
     - Sequences(Dataset): Custom dataset class for sequences, used for tokenizing text data.
     - prep_data(): Prepares the data for training and testing by creating datasets and data loaders.
-
-Author: [Your Name]
-Date: [Date]
 """
 import sklearn
 from sklearn.feature_extraction.text import CountVectorizer

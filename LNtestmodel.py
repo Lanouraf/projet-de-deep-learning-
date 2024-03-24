@@ -25,6 +25,7 @@ Ce fichier charge des modèles préalablement entraînés et évalue leurs perfo
    - Les moyennes des pertes d'entraînement pour chaque modèle sont affichées.
    - Les accuracies pour chaque modèle sont affichées.
    - Les accuracies sont enregistrées dans un DataFrame pandas et sauvegardées dans un fichier CSV.
+
 """
 from LNtrain.test import LNtest
 import numpy as np

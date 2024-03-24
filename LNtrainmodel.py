@@ -32,7 +32,6 @@ Les données sont préparées à l'aide de la fonction prep_data du module Seque
    - Les poids des modèles sont sauvegardés dans des fichiers .pth.
    - Les valeurs de perte d'entraînement sont sauvegardées dans des fichiers .pth pour chaque modèle.
 """
-
 from LNprepdata import prep_data
 from LNModule import BagOfWordsClassifierLayer,BagOfWordsClassifier,BagOfWordsClassifierLayerHM,BagOfWordsClassifierBatchNorm
 from LNtrain import LNtrain,LNtest
