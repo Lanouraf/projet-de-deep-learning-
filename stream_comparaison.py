@@ -1,6 +1,5 @@
 import streamlit as st
 from stream_comparaison_BOW import comparaison_bag_of_words
-
 def comparaison():
     st.title("Comparaison BN/LN")
     st.write(
