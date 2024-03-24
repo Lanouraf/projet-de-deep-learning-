@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import torch
 from stream_homemade_layernorm import homemade_layernorm
 from stream_comparaison import comparaison
+from Stream_Homemade_Batchnorm import homemade_batchnormalisation
 
 def main():
     st.title("Batch and Layer Normalization")
@@ -13,6 +14,7 @@ def main():
         [
             "Home",
             "Homemade Layer Normalisation",
+            "Homemade Batch Normalisation", 
             "Comparaison Layer et Batch"
         ],
     )
@@ -24,7 +26,10 @@ def main():
     
     elif app_mode == "Homemade Layer Normalisation":
         homemade_layernorm()
-
+        
+    elif app_mode == "Homemade Batch Normalisation":
+        homemade_batchnormalisation()
+        
     elif app_mode == "Comparaison Layer et Batch":
         comparaison()
 

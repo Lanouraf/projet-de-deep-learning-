@@ -172,7 +172,7 @@ def homemade_batchnormalisation():
     st.write("La précision du modèle LeNet-5 avec la  homemade Batch Normalisation sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_bn'] * 100))
     st.write("La précision du modèle LeNet-5 avec la batch normalisation de pytorch sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_stockbn']* 100))
     
-    
+    st.write(" Maintenant nous allons comparer les performances entre les différents modèles que nous avons entrainés. Pour ce faire vous pouvez choisir les deux modèles que vous voulez comparer.") 
     # Demander à l'utilisateur de choisir les 2 modèles qu'il veut comparer
     models = st.multiselect("Choisir les modèles", ["LeNet-5 with Pytorch-BatchNorm", "LeNet-5 with Homemade-BatchNorm", "LeNet-5 with Homemade-BatchNorm with a 1e-2 learning rate", "LeNet-5 with Homemade-BatchNorm with a 5e-2 learning rate", "LeNet-5 without modification", "LeNet-5 without modification and a 5e-2 learning rate"], key='models')
 

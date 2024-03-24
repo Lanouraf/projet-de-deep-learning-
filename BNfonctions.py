@@ -182,3 +182,40 @@ def plot_compare(all_losses_a, all_losses_b, mode, legend_a="model a", legend_b=
     if save_to is not None:
         plt.savefig(save_to + '-val.png')
     plt.show()
+    
+    
+    
+
+
+def plot_comparetrain(all_losses_a, all_losses_b, mode, legend_a="model a", legend_b="model b", save_to="out"):
+    """
+    Draws plots comparing models a and b from their training losses
+
+    :param all_losses_a: Losses for model a
+    :param all_losses_b: Losses for model b
+    :param legend_a: Name of the model a, to be shown in the plot's legend
+    :param legend_b: Name of the model b, to be shown in the plot's legend
+    :param save_to: If a file name is specified, plots are saved to SVG files
+    """
+
+    losses_a = [item[0] for item in all_losses_a]
+    losses_b = [item[0] for item in all_losses_b]
+ 
+
+    f = plt.figure()
+    for j, (epoch_losses_a, epoch_losses_b) in enumerate(zip(losses_a, losses_b)):
+        plt_a = plt.scatter(range(len(epoch_losses_a)), [losses[-1] for losses in epoch_losses_a], marker = 'o',
+                            c = 'tab:blue', alpha = 0.3)
+        plt.plot(range(len(epoch_losses_a)), [losses[-1] for losses in epoch_losses_a], '-', color = 'tab:blue')
+        plt_b = plt.scatter(range(len(epoch_losses_b)), [losses[-1] for losses in epoch_losses_b], marker = 'o',
+                            c = 'tab:orange', alpha = 0.3)
+        plt.plot(range(len(epoch_losses_a)), [losses[-1] for losses in epoch_losses_b], '-', color = 'tab:orange')
+    plt.title("Training losses")
+    plt.xlabel("Epochs")
+    plt.ylabel("Loss")
+    plt.legend((plt_a, plt_b), (legend_a, legend_b))
+    if mode == "streamlit":
+        st.pyplot(f)
+    if save_to is not None:
+        plt.savefig(save_to + '.png')
+
