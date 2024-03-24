@@ -133,41 +133,41 @@ class LeNetStockBN(nn.Module):
     
     
     
-    class LeNetLayerNorm(nn.Module):
-        """
-        Architecture LeNet-5 avec LayerNorm entre chaque couche.
-        Cette classe définit l'architecture du modèle LeNet-5 avec l'utilisation de LayerNorm entre chaque couche.
-        """
+class LeNetLayerNorm(nn.Module):
+    """
+    Architecture LeNet-5 avec LayerNorm entre chaque couche.
+    Cette classe définit l'architecture du modèle LeNet-5 avec l'utilisation de LayerNorm entre chaque couche.
+    """
 
-        def __init__(self):
-            super().__init__()
-            self.layers = nn.Sequential(
-                nn.Conv2d(1, 6, kernel_size=5, padding=2),  # C1: 28x28x6
-                nn.LayerNorm((6, 28, 28)),
-                nn.AvgPool2d(kernel_size=2, stride=2),  # S2: 14x14x6
-                nn.LayerNorm((6, 14, 14)),
-                nn.Sigmoid(),
+    def __init__(self):
+        super().__init__()
+        self.layers = nn.Sequential(
+            nn.Conv2d(1, 6, kernel_size=5, padding=2),  # C1: 28x28x6
+            nn.LayerNorm((6, 28, 28)),
+            nn.AvgPool2d(kernel_size=2, stride=2),  # S2: 14x14x6
+            nn.LayerNorm((6, 14, 14)),
+            nn.Sigmoid(),
 
-                nn.Conv2d(6, 16, kernel_size=5),  # C3: 10x10x16
-                nn.LayerNorm((16, 10, 10)),
-                nn.AvgPool2d(kernel_size=2, stride=2),  # 5x5x16
-                nn.LayerNorm((16, 5, 5)),
-                nn.Sigmoid(),
+            nn.Conv2d(6, 16, kernel_size=5),  # C3: 10x10x16
+            nn.LayerNorm((16, 10, 10)),
+            nn.AvgPool2d(kernel_size=2, stride=2),  # 5x5x16
+            nn.LayerNorm((16, 5, 5)),
+            nn.Sigmoid(),
 
-                nn.Flatten(),
-                nn.Linear(5 * 5 * 16, 120),
-                nn.LayerNorm(120),
-                nn.Sigmoid(),
+            nn.Flatten(),
+            nn.Linear(5 * 5 * 16, 120),
+            nn.LayerNorm(120),
+            nn.Sigmoid(),
 
-                nn.Linear(120, 84),
-                nn.LayerNorm(84),
-                nn.Sigmoid(),
+            nn.Linear(120, 84),
+            nn.LayerNorm(84),
+            nn.Sigmoid(),
 
-                nn.Linear(84, 10),
-                nn.Softmax()
-            )
+            nn.Linear(84, 10),
+            nn.Softmax()
+        )
 
-        def forward(self, x):
+    def forward(self, x):
             """
             Effectue une propagation avant à travers le réseau.
             
