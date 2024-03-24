@@ -9,6 +9,7 @@ import time
 from fonctions import plot_compare  
 from fonctions import test
 from batch.architecture import LeNet, LeNetBN , LeNetStockBN
+from batch.BatchNorm import BatchNorm1D, BatchNorm2D
 
 
 
@@ -55,14 +56,17 @@ def homemade_batchnormalisation():
     
     descriptionMNISt()
     
-    # Instructions sur les modèles entraînés
-    st.write("Nous avons pour cette expérience entrainées 6 modèles:")
-    st.write("- Un modèle LeNet-5  avec la BatchNorm de Pytorch et un learning rate de 1e-3")
-    st.write("- Un modèle LeNet-5 avec notre BatchNorm fait main et un learning rate de 1e-3")
-    st.write("- Un modèle LeNet-5 avec notre BatchNorm fait main et un learning rate de 1e-2")
-    st.write("- Un modèle LeNet-5 avec notre BatchNorm fait main et un learning rate de 5e-2")
-    st.write("- Un modèle LeNet-5 simple sans batch normalisation et un learning rate de 1e-3")
-    st.write("- Un modèle LeNet-5 simple sans batch normalisation et un learning rate de 5e-2")
+    # Instructions sur les modèles entraînés si le bouton est cliqué
+    if st.button("Afficher le détails des différents modèles entrainés", key='button2'):
+        st.write("Nous avons pour cette expérience entrainés 6 modèles:")
+        st.write("- Un modèle LeNet-5  avec la BatchNorm de Pytorch et un learning rate de 1e-3")
+        st.write("- Un modèle LeNet-5 avec notre BatchNorm fait main et un learning rate de 1e-3")
+        st.write("- Un modèle LeNet-5 avec notre BatchNorm fait main et un learning rate de 1e-2")
+        st.write("- Un modèle LeNet-5 avec notre BatchNorm fait main et un learning rate de 5e-2")
+        st.write("- Un modèle LeNet-5 simple sans batch normalisation et un learning rate de 1e-3")
+        st.write("- Un modèle LeNet-5 simple sans batch normalisation et un learning rate de 5e-2")
+    else:
+        pass
     
     st.write(" Tout d'abord nous allons comparer les courbes de perte d'entraînement et de perte de validation pour les modèles LeNet-5 avec la batchnorm Pytorch et la homemade BatchNorm.")
     
@@ -73,7 +77,7 @@ def homemade_batchnormalisation():
     
     # Vérifier si les fichiers de loss existent déjà
     if not os.path.exists('valeur loss-models-batch//losses_stockbn.npy') or not os.path.exists('valeur loss-models-batch//losses_stockbn.npy') or not os.path.exists('valeur loss-models-batch//losses_bn.npy') or not os.path.exists('valeur loss-models-batch//val_losses_bn.npy'):
-        # Télécharger les fichiers de loss
+        # Télécharger les fichiers de loss depuis Google Drive si les fichiers n'existent pas
         placeholder.text("Les fichiers de loss n'ont pas été trouvés. Téléchargement en cours...")
        # Liste des IDs de vos fichiers sur Google Drive
         file_ids = ['19dkl_J39vGJAIVhhG51IOjJavhkP4_fr', '1HEeypE2pBz7KpogT0KW4eQNTEp7hJhSd', '1TIkKrY9uV-oWjYHQE4zvuk4kfpLJgwdV','1YVzklFpo5ty6ApDK-XBzdb18zuogkQsY']
@@ -88,15 +92,23 @@ def homemade_batchnormalisation():
          
             gdd.download_file_from_google_drive(file_id=file_id, dest_path=dest_path, overwrite=True, showsize=True)
     
-    
+    # Sinon, afficher un message indiquant que les fichiers de loss existent déjà
     else:
         placeholder.text("Les fichiers de loss existent déjà.")
 
-    # Charger les fichiers de loss
-    losses_stockbn = np.load('valeur loss-models-batch//losses_stockbn.npy')
+    # Charger les fichiers de loss suite au téléchargement
+    losses_vanilla = np.load('valeur loss-models-batch//losses_vanilla.npy')
+    val_losses_vanilla = np.load('valeur loss-models-batch//val_losses_vanilla.npy')
     losses_bn = np.load('valeur loss-models-batch//losses_bn.npy')
-    val_losses_stockbn = np.load('valeur loss-models-batch//val_losses_stockbn.npy')
     val_losses_bn = np.load('valeur loss-models-batch//val_losses_bn.npy')
+    losses_stockbn = np.load('valeur loss-models-batch//losses_stockbn.npy')
+    val_losses_stockbn = np.load('valeur loss-models-batch//val_losses_stockbn.npy')
+    losses_bn2 = np.load('valeur loss-models-batch//losses_bn2.npy')
+    val_losses_bn2 = np.load('valeur loss-models-batch//val_losses_bn2.npy')
+    losses_bn3 = np.load('valeur loss-models-batch//losses_bn3.npy')
+    val_losses_bn3 = np.load('valeur loss-models-batch//val_losses_bn3.npy')
+    losses_vanilla2 = np.load('valeur loss-models-batch//losses_vanilla2.npy')
+    val_losses_vanilla2 = np.load('valeur loss-models-batch//val_losses_vanilla2.npy')
 
     if losses_stockbn is not None and losses_bn is not None and val_losses_stockbn is not None and val_losses_bn is not None:
         placeholder.text("Les fichiers de loss ont été téléchargés avec succès.")
@@ -111,8 +123,7 @@ def homemade_batchnormalisation():
     
     plot_compare(all_losses_stockbn, all_losses_bn,mode="streamlit", legend_a="LeNet-5 with Pytorch-BatchNorm", legend_b="LeNet-5 with Homemade-BatchNorm", save_to="result_plot_batch/StockBN_vs_BatchNorm")
     
-    st.write("Le graphique ci-dessus compare les courbes de perte d'entraînement et de perte de validation pour les modèles LeNet-5 avec la batchnorm Pytorch et la homemade BatchNorm.")
-    st.write("On peut remarquer que la batchnorm Pytorch à des performances similaires à notre batchnorm homemade, ce qui veut dire que notre implémentation est efficace.")
+    st.write("On peut remarquer que la batch normalisation Pytorch à des performances similaires à notre batch normalisation homemade, ce qui veut dire que notre implémentation est efficace.")
     #on recupères les modèles entrainées depuis google drive et on calcule la précision sur le jeu de test
     
     #on recupère les données de test 
