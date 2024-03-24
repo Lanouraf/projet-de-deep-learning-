@@ -123,6 +123,8 @@ torch.save(accuracies, 'batch/accuracies.pth')
 # Load the accuracies dictionary
 loaded_accuracies = torch.load('batch/accuracies.pth')
 
+#le fichier d'accuaries existe et s'appelle accuracies.pth 
+
 # Check if the accuracies dictionary is empty
 if not loaded_accuracies:
     print("The accuracies dictionary is empty.")

@@ -2,12 +2,10 @@ import streamlit as st
 import numpy as np
 from google_drive_downloader import GoogleDriveDownloader as gdd
 import torch
-from torchvision import datasets, transforms
-from torch.utils.data import DataLoader
 import os
 import time
-from BNfonctions import plot_compare  
-from BNfonctions import test
+from BNfonctions import plot_compare 
+
 
 
 

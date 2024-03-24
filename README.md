@@ -4,7 +4,7 @@
 * Article :
   - Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift: [Article](https://arxiv.org/abs/1502.03167)
   - Layer Normalization: [Article](https://arxiv.org/abs/1607.06450)
-  - Code source associé : [GitHub](https://github.com/David-Estevez/BatchNorm/tree/master/BatchNorm)
+  - Code source associé à la Batch Normalisation : [GitHub](https://github.com/David-Estevez/BatchNorm/tree/master/BatchNorm)
 * Overleaf :
   - Lien vers le document sur Overleaf : [Overleaf](https://fr.overleaf.com/read/szxdnkrtxrhr#4172b5)
 

@@ -1,3 +1,8 @@
+#ce fichier contient les fonctions de normalisation par lots personnalisées.
+#elle sont inspirées du github :https://github.com/David-Estevez/BatchNorm/tree/master/BatchNorm
+#elles implementent la normalisation par lots en 1D et 2D qui sera utilisée dans les architectures le prefixe Homemade Batch Normalisation
+
+
 import torch
 import torch.nn as nn
 

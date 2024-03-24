@@ -1,26 +1,21 @@
-"""Functions for the deep learning mode.
+"""Fonctions pour le mode deep learning.
 
-This script contains functions for training and evaluating a deep learning model. It includes a training loop, a function to compute accuracy, and other utility functions.
+Ce script contient des fonctions pour l'entraînement et l'évaluation d'un modèle de deep learning. Il comprend une boucle d'entraînement, une fonction pour calculer la précision et d'autres fonctions utilitaires.
 
-The main function in this script is `fit`, which performs the training loop for a given model. It takes the model, training data, validation data, number of epochs, loss function, learning rate, and other parameters as inputs. It trains the model using the provided data and returns the training losses, validation losses, and accuracy for each epoch.
+La principale fonction de ce script est `fit`, qui effectue la boucle d'entraînement pour un modèle donné. Elle prend en entrée le modèle, les données d'entraînement, les données de validation, le nombre d'époques, la fonction de perte, le taux d'apprentissage et d'autres paramètres. Elle entraîne le modèle en utilisant les données fournies et renvoie les pertes d'entraînement, les pertes de validation et la précision pour chaque époque.
 
-Other functions in this script include:
-- `accuracy`: Computes the accuracy of the network given the output predictions and ground truth labels.
+Les autres fonctions de ce script comprennent:
+- `accuracy`: Calcule la précision du réseau à partir des prédictions de sortie et des étiquettes de vérité.
 
-Note: This script requires the following dependencies: torch, torch.nn, torch.optim, tqdm, matplotlib.pyplot.
+Note: Ce script nécessite les dépendances suivantes: torch, torch.nn, torch.optim, tqdm, matplotlib.pyplot.
 
 """
 
 
-import argparse
-import os
+
 
 import torch
 from torch import nn
-from torch.utils.data import DataLoader
-from torchvision import datasets
-from torchvision.transforms import ToTensor
-import pandas as pd
 import streamlit as st
 
     ########################################
@@ -142,7 +137,7 @@ def plot_compare(all_losses_a, all_losses_b, mode, legend_a="model a", legend_b=
     :param all_losses_b: Losses for model b
     :param legend_a: Name of the model a, to be shown in the plot's legend
     :param legend_b: Name of the model b, to be shown in the plot's legend
-    :param save_to: If a file name is specified, plots are saved to SVG files
+    :param save_to: If a file name is specified, plots are saved to png files
     """
 
     losses_a = [item[0] for item in all_losses_a]
@@ -195,7 +190,7 @@ def plot_comparetrain(all_losses_a, all_losses_b, mode, legend_a="model a", lege
     :param all_losses_b: Losses for model b
     :param legend_a: Name of the model a, to be shown in the plot's legend
     :param legend_b: Name of the model b, to be shown in the plot's legend
-    :param save_to: If a file name is specified, plots are saved to SVG files
+    :param save_to: If a file name is specified, plots are saved to png files
     """
 
     losses_a = [item[0] for item in all_losses_a]

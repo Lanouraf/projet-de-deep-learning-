@@ -1,3 +1,8 @@
+# Description: Ce fichier contient les classes des architectures de réseaux de neurones utilisées pour les expériences de normalisation par lots.
+#par exemple LeNet, LeNetBN, LeNetStockBN, LeNetLayerNorm
+# ---------------------------------------------
+
+
 import torch.nn as nn
 from BatchNorm import BatchNorm2D, BatchNorm1D
 
