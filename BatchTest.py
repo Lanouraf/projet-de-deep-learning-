@@ -1,5 +1,5 @@
 import os
-from Batcharchitecture import LeNet, LeNetBN, LeNetStockBN, LeNetLayerNorm
+from batch.Batcharchitecture import LeNet, LeNetBN, LeNetStockBN, LeNetLayerNorm
 from google_drive_downloader import GoogleDriveDownloader as gdd
 import torch
 from torchvision import datasets, transforms
@@ -49,12 +49,23 @@ accuracies = {}
 accuracies = {}
 
 # Calculate accuracy for modèle_stockbn
-accuracy_stockbn = calculate_accuracy(modèle_stockbn)
+_,accuracy_stockbn = test(modèle_stockbn, test_dataloader)
 accuracies['modèle_stockbn'] = accuracy_stockbn
 
 # Calculate accuracy for modèle_bn
-accuracy_bn = calculate_accuracy(modèle_bn)
+_,accuracy_bn = test(modèle_bn, test_dataloader)
 accuracies['modèle_bn'] = accuracy_bn
 
 # Save the accuracies dictionary
 torch.save(accuracies, 'batch/accuracies.pth')
+
+
+#verifications
+# Load the accuracies dictionary
+loaded_accuracies = torch.load('batch/accuracies.pth')
+
+# Check if the accuracies dictionary is empty
+if not loaded_accuracies:
+    print("The accuracies dictionary is empty.")
+else:
+    print("The accuracies dictionary is not empty.")

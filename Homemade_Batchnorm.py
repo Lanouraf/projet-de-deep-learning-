@@ -9,7 +9,7 @@ import time
 from Batchfonctions import plot_compare  
 from Batchfonctions import test
 from Batcharchitecture import LeNet, LeNetBN , LeNetStockBN
-from batch.BatchNorm import BatchNorm1D, BatchNorm2D
+
 
 
 
