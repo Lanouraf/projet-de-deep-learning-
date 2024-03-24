@@ -17,3 +17,8 @@ Nous avons développé une application Streamlit pour présenter les performance
 streamlit run app.py
 ```
 L'application présente une analyse comparative des deux techniques de normalisation dans divers scénarios d'utilisation, en mettant en évidence leurs avantages et leurs limitations.
+
+Les bibliothèques requises pour exécuter l'application sont répertoriées dans le fichier requirements.txt. Pour les installer, veuillez exécuter la commande suivante :
+```bash
+pip install -r requirements.txt
+```
