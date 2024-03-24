@@ -1,5 +1,4 @@
 import streamlit as st
-#from stream_comparaison_BOW import comparaison_bag_of_words
 from stream_comparaison_BOW import comparaison_bag_of_words
 
 def comparaison():
@@ -12,7 +11,7 @@ def comparaison():
 
     # Section pour choisir la tâche
     st.subheader("Choix de la tâche")
-    task = st.selectbox("Sélectionnez la tâche", ["Bag of Words", "Thomas", "FF"])
+    task = st.selectbox("Sélectionnez la tâche", ["Bag of Words", "Thomas"])
 
     # Section pour afficher les datasets et les performances des modèles
     st.subheader("Comparaison des performances")

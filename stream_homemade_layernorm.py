@@ -21,7 +21,7 @@ from google_drive_downloader import GoogleDriveDownloader as gdd
 from LNprepdata import prep_data
 import torch
 from LNModule import BagOfWordsClassifier, BagOfWordsClassifierLayer, BagOfWordsClassifierLayerHM
-from DATALOAD import data_review
+from LN_dataload import data_review
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
