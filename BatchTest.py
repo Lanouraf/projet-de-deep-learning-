@@ -4,6 +4,7 @@ from google_drive_downloader import GoogleDriveDownloader as gdd
 import torch
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
+from fonctions import test
 
 #on recupère les données de test 
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5), (0.5))])
@@ -41,3 +42,19 @@ modèle_bn_entrainé=torch.load('batch/modèle_bn_entrainé.pth')
 modèle_bn.load_state_dict(modèle_bn_entrainé)
 
 
+accuracies = {}
+
+
+# Create a dictionary to store accuracies and their associated models
+accuracies = {}
+
+# Calculate accuracy for modèle_stockbn
+accuracy_stockbn = calculate_accuracy(modèle_stockbn)
+accuracies['modèle_stockbn'] = accuracy_stockbn
+
+# Calculate accuracy for modèle_bn
+accuracy_bn = calculate_accuracy(modèle_bn)
+accuracies['modèle_bn'] = accuracy_bn
+
+# Save the accuracies dictionary
+torch.save(accuracies, 'batch/accuracies.pth')

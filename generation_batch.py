@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
 from fonctions import fit , test
-from batch.architecture import LeNet, LeNetBN, LeNetStockBN
+from batch.architecture import LeNet, LeNetBN, LeNetStockBN , LeNetLayerNorm
 import numpy as np
 import os
 import numpy as np
@@ -34,6 +34,29 @@ test_dataloader = DataLoader(test1, batch_size=512, shuffle=False)
 
 # Train models
 # ---------------------------------------------
+
+
+#  LeNet-5_layerNorm
+all_losses_layer = []
+all_acc_layer = []
+
+for i in range(3):
+    model_layer = LeNetLayerNorm()
+    losses_layer, val_losses_layer, acc_layer ,model_layer = fit(model_layer, train_dataloader, valid_dataloader,
+                                                          epochs=10, lr=1e-3)
+    testloss_layer, testacc_layer = test(model_layer, test_dataloader)
+    all_losses_layer .append((losses_layer, val_losses_layer))
+    all_losses_layer .append(acc_layer)
+    
+    # Save best Vanilla LeNet-5 model
+best_model_layer = model_layer
+torch.save(best_model_layer.state_dict(), 'best_model_layer.pth')
+
+np.save('valeur loss-models-batch\\val_losses_layer.npy', val_losses_layer)
+np.save('valeur loss-models-batch\\losses_layer.npy', losses_layer)
+
+
+
 
 
 # Vanilla LeNet-5
@@ -118,7 +141,7 @@ best_model_stockbn = model_stockbn
 torch.save(best_model_stockbn.state_dict(), 'best_model_stockbn.pth')
 
 
-# Store loss values
+# Store validation loss values
 
 np.save('valeur loss-models-batch\\val_losses_bn3.npy', val_losses_bn3)
 np.save('valeur loss-models-batch\\val_losses_vanilla2.npy', val_losses_vanilla2)
