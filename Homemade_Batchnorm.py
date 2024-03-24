@@ -82,10 +82,10 @@ def homemade_batchnormalisation():
 
 
        # Liste des IDs de vos fichiers sur Google Drive
-        file_ids = ['19dkl_J39vGJAIVhhG51IOjJavhkP4_fr', '1HEeypE2pBz7KpogT0KW4eQNTEp7hJhSd','11IH2ZXJ3b_tZezDk8kN3Doar2-cs5YIZ','1h798r9UZZWu89zgtZ75L37YhiYawK6yY','d/19c2MB_l_DqM_ACIbJiQ8HxbWo5O0jQni','1CFV-3f3B_gBgSVwVr8a-Okr1sxGORL8R','1ENI0CFZjgyM9A2rW_tIg6_nAXs6531oS','1Zv725JX9_WRH1WMcajV9RQjQ-zDLuoY8','1ZWC-0GKxJkZP8XbujXyWzIpEVMyov9qa','1xNR6YIpXYTyxdt6Tc8eWqTiC0_y3P8RM' ,'1TIkKrY9uV-oWjYHQE4zvuk4kfpLJgwdV','1YVzklFpo5ty6ApDK-XBzdb18zuogkQsY']
+        file_ids = ['19dkl_J39vGJAIVhhG51IOjJavhkP4_fr', '1HEeypE2pBz7KpogT0KW4eQNTEp7hJhSd','11IH2ZXJ3b_tZezDk8kN3Doar2-cs5YIZ','1h798r9UZZWu89zgtZ75L37YhiYawK6yY','19c2MB_l_DqM_ACIbJiQ8HxbWo5O0jQni','1CFV-3f3B_gBgSVwVr8a-Okr1sxGORL8R','1ENI0CFZjgyM9A2rW_tIg6_nAXs6531oS','1Zv725JX9_WRH1WMcajV9RQjQ-zDLuoY8','1ZWC-0GKxJkZP8XbujXyWzIpEVMyov9qa','1xNR6YIpXYTyxdt6Tc8eWqTiC0_y3P8RM' ,'1TIkKrY9uV-oWjYHQE4zvuk4kfpLJgwdV','1YVzklFpo5ty6ApDK-XBzdb18zuogkQsY']
 
         # Liste des noms de fichiers de sortie
-        output_filenames = ['losses_stockbn.npy', 'losses_bn.npy','losses_vanilla.npy','losses_vanilla2', 'losses_bn2.npy','losses_bn3.npy' ,'val_losses_vanilla','val_losses_vanilla2' ,'val_losses_bn3','val_losses_bn2','val_losses_stockbn.npy','val_losses_bn.npy']
+        output_filenames = ['losses_stockbn.npy', 'losses_bn.npy','losses_vanilla.npy','losses_vanilla2.npy', 'losses_bn2.npy','losses_bn3.npy' ,'val_losses_vanilla.npy','val_losses_vanilla2.npy' ,'val_losses_bn3.npy','val_losses_bn2.npy','val_losses_stockbn.npy','val_losses_bn.npy']
 
         # Boucle pour télécharger chaque fichier de loss depuis Google Drive
         for file_id, output_filename in zip(file_ids, output_filenames):
@@ -178,24 +178,64 @@ def homemade_batchnormalisation():
 
     # Vérifier les choix de l'utilisateur et afficher le graphique de comparaison correspondant
     if len(models) == 2:
+        
+        #tous les choix possibles de comparaison avec StockBN
         if "LeNet-5 with Pytorch-BatchNorm" in models and "LeNet-5 with Homemade-BatchNorm" in models:
             plot_compare(all_losses_stockbn, all_losses_bn, mode="streamlit", legend_a="LeNet-5 with Pytorch-BatchNorm", legend_b="LeNet-5 with Homemade-BatchNorm", save_to="result_plot_batch/StockBN_vs_BatchNorm")
-        elif "LeNet-5 with Pytorch-BatchNorm" in models:
-                st.write("La précision du modèle LeNet-5 avec la batch normalisation de pytorch sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_stockbn']* 100))
-        elif "LeNet-5 with Homemade-BatchNorm" in models:
-                st.write("La précision du modèle LeNet-5 avec la  homemade Batch Normalisation sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_bn'] * 100))
+        elif "LeNet-5 with Pytorch-BatchNorm" in models and "LeNet-5 with Homemade-BatchNorm with a 1e-2 learning rate" in models:
+            plot_compare(all_losses_stockbn, all_losses_bn2, mode="streamlit", legend_a="LeNet-5 with Pytorch-BatchNorm", legend_b="LeNet-5 with Homemade-BatchNorm (learning rate: 1e-2)", save_to="result_plot_batch/StockBN_vs_BatchNorm_lr1e-2")
+        elif "LeNet-5 with Pytorch-BatchNorm" in models and "LeNet-5 with Homemade-BatchNorm with a 5e-2 learning rate" in models:
+            plot_compare(all_losses_stockbn, all_losses_bn3, mode="streamlit", legend_a="LeNet-5 with Pytorch-BatchNorm", legend_b="LeNet-5 with Homemade-BatchNorm (learning rate: 5e-2)", save_to="result_plot_batch/StockBN_vs_BatchNorm_lr5e-2")
+        elif "LeNet-5 with Pytorch-BatchNorm" in models and "LeNet-5 without modification" in models:
+            plot_compare(all_losses_stockbn, all_losses_vanilla, mode="streamlit", legend_a="LeNet-5 with Pytorch-BatchNorm", legend_b= "LeNet-5 without modification", save_to="result_plot_batch/BatchNorm_vs_vanilla")
+        elif "LeNet-5 with Pytorch-BatchNorm" in models and  "LeNet-5 without modification and a 5e-2 learning rate" in models:
+            plot_compare(all_losses_stockbn, all_losses_vanilla2, mode="streamlit", legend_a="LeNet-5 with Pytorch-BatchNorm", legend_b= "LeNet-5 without modification and a 5e-2 learning rate", save_to="result_plot_batch/BatchNorm_vs_vanilla_lr5e-2")
+        
+        
+        elif "LeNet-5 with Homemade-BatchNorm" in models and "LeNet-5 with Homemade-BatchNorm with a 1e-2 learning rate" in models:
+            plot_compare(all_losses_bn, all_losses_bn2, mode="streamlit", legend_a="LeNet-5 with Homemade-BatchNorm", legend_b="LeNet-5 with Homemade-BatchNorm (learning rate: 1e-2)", save_to="result_plot_batch/BatchNorm_vs_BatchNorm_lr1e-2")
+        elif "LeNet-5 with Homemade-BatchNorm" in models and "LeNet-5 with Homemade-BatchNorm with a 5e-2 learning rate" in models:
+            plot_compare(all_losses_bn, all_losses_bn3, mode="streamlit", legend_a="LeNet-5 with Homemade-BatchNorm", legend_b="LeNet-5 with Homemade-BatchNorm (learning rate: 5e-2)", save_to="result_plot_batch/_BatchNorm_vs_BatchNorm_lr5e-2")
+        elif "LeNet-5 with Homemade-BatchNorm" in models and "LeNet-5 without modification" in models:
+            plot_compare(all_losses_bn, all_losses_vanilla, mode="streamlit", legend_a="LeNet-5 with Homemade-BatchNorm", legend_b= "LeNet-5 without modification", save_to="result_plot_batch/BatchNorm_vs_vanilla")
+        elif "LeNet-5 with Homemade-BatchNorm" in models and  "LeNet-5 without modification and a 5e-2 learning rate" in models:
+            plot_compare(all_losses_bn, all_losses_vanilla2, mode="streamlit", legend_a="LeNet-5 with Homemade-BatchNorm", legend_b= "LeNet-5 without modification and a 5e-2 learning rate", save_to="result_plot_batch/_BatchNormvs_vanilla_lr5e-2")
+        
+        elif "LeNet-5 with Homemade-BatchNorm with a 1e-2 learning rate" in models and "LeNet-5 with Homemade-BatchNorm with a 5e-2 learning rate" in models:
+            plot_compare(all_losses_bn2, all_losses_bn3, mode="streamlit", legend_a="LeNet-5 with Homemade-BatchNorm with a 1e-2 learning rate", legend_b="LeNet-5 with Homemade-BatchNorm with a 5e-2 learning rate", save_to="result_plot_batch/BatchNorm_lr1e-2_vs_BatchNorm_lr5e-2")
+        elif "LeNet-5 with Homemade-BatchNorm with a 1e-2 learning rate" in models and  "LeNet-5 without modification and a 5e-2 learning rate" in models:
+            plot_compare(all_losses_bn2, all_losses_vanilla2, mode="streamlit", legend_a="LeNet-5 with Homemade-BatchNorm with a 1e-2 learning rate", legend_b= "LeNet-5 without modification and a 5e-2 learning rate", save_to="result_plot_batch/BatchNorm_lr1e-2vs_vanilla_lr5e-2")
+        elif "LeNet-5 with Homemade-BatchNorm with a 1e-2 learning rate" in models and "LeNet-5 without modification" in models:
+            plot_compare(all_losses_bn2, all_losses_vanilla, mode="streamlit", legend_a="LeNet-5 with Homemade-BatchNorm with a 1e-2 learning rate", legend_b= "LeNet-5 without modification", save_to="result_plot_batch/BatchNorm_lr1e-2__vs_vanilla")    
 
+        elif "LeNet-5 with Homemade-BatchNorm with a 5e-2 learning rate"  in models and  "LeNet-5 without modification and a 5e-2 learning rate" in models:
+            plot_compare(all_losses_bn3, all_losses_vanilla2, mode="streamlit", legend_a="LeNet-5 with Homemade-BatchNorm with a 5e-2 learning rate", legend_b= "LeNet-5 without modification and a 5e-2 learning rate", save_to="result_plot_batch/BatchNorm_lr5e-2vs_vanilla_lr5e-2")
+        elif "LeNet-5 with Homemade-BatchNorm with a 5e-2 learning rate"  in models and "LeNet-5 without modification" in models:
+            plot_compare(all_losses_bn3, all_losses_vanilla, mode="streamlit", legend_a="LeNet-5 with Homemade-BatchNorm with a 5e-2 learning rate", legend_b= "LeNet-5 without modification", save_to="result_plot_batch/BatchNorm_lr5e-2__vs_vanilla")    
 
-        else:
-            st.write("Veuillez sélectionner les modèles corrects.")
+        elif "LeNet-5 without modification"  in models and "LeNet-5 without modification and a 5e-2 learning rate" in models:
+            plot_compare(all_losses_vanilla2, all_losses_vanilla, mode="streamlit", legend_a="LeNet-5 without modification and a 5e-2 learning rate", legend_b= "LeNet-5 without modification", save_to="result_plot_batch/vanilla_lr5e-2__vs_vanilla")
+        
     else:
         st.write("Veuillez sélectionner exactement deux modèles.")
             
+    if "LeNet-5 with Pytorch-BatchNorm" in models:
+            st.write("La précision du modèle LeNet-5 avec la batch normalisation de pytorch sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_stockbn']* 100))
+    if "LeNet-5 with Homemade-BatchNorm" in models:
+            st.write("La précision du modèle LeNet-5 avec la homemade Batch Normalisation sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_bn'] * 100))
+    if "LeNet-5 with Homemade-BatchNorm with a 1e-2 learning rate" in models:
+            st.write("La précision du modèle LeNet-5 avec la homemade Batch Normalisation (learning rate: 1e-2) sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_bn2'] * 100))  
     
+    if "LeNet-5 with Homemade-BatchNorm with a 5e-2 learning rate" in models:
+        st.write("La précision du modèle LeNet-5 avec la homemade Batch Normalisation (learning rate: 5e-2) sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_bn3'] * 100))
     
-     
+    if "LeNet-5 without modification" in models:
+        st.write("La précision du modèle LeNet-5 sans modification sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_vanilla'] * 100))   
+    
+    if "LeNet-5 without modification and a 5e-2 learning rate" in models:
+        st.write("La précision du modèle LeNet-5 sans modification (learning rate: 5e-2) sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_vanilla2'] * 100))
+    
        
-        
 
     
     

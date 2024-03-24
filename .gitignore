@@ -5,9 +5,10 @@ BOW_BN.pth
 loss_BN.pth
 losses.pth
 accuracies.csv
-# best_model_bn.pth
-# best_model_bn2.pth
-# best_model_bn3.pth
-# best_model_stockbn.pth
-# best_model_vanilla.pth
-# best_model_vanilla2.pth
+batch/modèle_bn_entrainé.pth
+batch/modèle_bn2_entrainé.pth
+batch/modèle_bn3_entrainé.pth
+batch/modèle_layer_entrainé.pth
+batch/modèle_vanilla_entrainé.pth
+batch/modèle_vanilla2_entrainé.pth
+batch/modèles_stockbn_entrainé.pth
