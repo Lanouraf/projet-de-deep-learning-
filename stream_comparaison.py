@@ -1,6 +1,6 @@
 import streamlit as st
 from stream_comparaison_BOW import comparaison_bag_of_words
-from stream_comparaison_lenet import comparaison_Lenet
+from Stream_comparaison_Lenet import comparaison_Lenet
 def comparaison():
     st.title("Comparaison BN/LN")
     st.write(
