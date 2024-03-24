@@ -26,9 +26,9 @@ Ce fichier charge des modèles préalablement entraînés et évalue leurs perfo
    - Les accuracies pour chaque modèle sont affichées.
    - Les accuracies sont enregistrées dans un DataFrame pandas et sauvegardées dans un fichier CSV.
 """
-from LNtrain import LNtest
+from LNtrain.test import LNtest
 import numpy as np
-from Sequences import prep_data
+from LNprepdata import prep_data
 from LNModule import BagOfWordsClassifier, BagOfWordsClassifierLayer, BagOfWordsClassifierLayerHM, BagOfWordsClassifierBatchNorm
 from google_drive_downloader import GoogleDriveDownloader as gdd
 import torch
@@ -87,10 +87,10 @@ acc3 = LNtest(model3, test_loader)
 acc4 = LNtest(model4, test_loader)
 
 # Affichage des accuracies
-print("Accuracy modèle 1:", acc1)
-print("Accuracy modèle 2:", acc2)
-print("Accuracy modèle 3:", acc3)
-print("Accuracy modèle 4:", acc4)
+print("Accuracy BOW:", acc1)
+print("Accuracy BOW_LN:", acc2)
+print("Accuracy BOW_HM_LN:", acc3)
+print("Accuracy BOW_BN:", acc4)
 
 # Enregistrement des accuracies dans un fichier CSV
 accuracies_dict = {"BOW": acc1, "BOW_LN": acc2, "BOW_HM_LN": acc3, "BOW_BN": acc4}

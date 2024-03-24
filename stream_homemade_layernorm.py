@@ -18,7 +18,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from google_drive_downloader import GoogleDriveDownloader as gdd
-from Sequences import prep_data
+from LNprepdata import prep_data
 import torch
 from LNModule import BagOfWordsClassifier, BagOfWordsClassifierLayer, BagOfWordsClassifierLayerHM
 from DATALOAD import data_review
@@ -45,13 +45,11 @@ def homemade_layernorm():
     train_dataset, train_loader, test_dataset, test_loader = prep_data()
     
     # Chargement des pertes depuis le fichier losses.csv
-    url = f'https://drive.google.com/file/d/1lESMtwwy_qzfWtpfpGDQYKzLOkABrIyp/view?usp=sharing'
-    dest_path = './losses.pth'
-    gdd.download_file_from_google_drive(file_id='1lESMtwwy_qzfWtpfpGDQYKzLOkABrIyp', dest_path=dest_path, overwrite=True, showsize=True)
+    gdd.download_file_from_google_drive(file_id='1lESMtwwy_qzfWtpfpGDQYKzLOkABrIyp', dest_path='./losses.pth', overwrite=True, showsize=True)
     losses=torch.load('losses.pth')
     # Lecture des accuracies depuis le fichier accuracies.csv dans votre répertoire Git
+    gdd.download_file_from_google_drive(file_id='1Yng2XlYhJtC7HBr8LtzJGiRQijFLQr0z', dest_path='./accuracies.csv', overwrite=True, showsize=True)
     accuracies_df = pd.read_csv("accuracies.csv", header=None, index_col=0)  # Charger sans utiliser la première colonne comme index
-    
     # Création d'un dictionnaire à partir des données du fichier CSV
     accuracies_dict = accuracies_df.to_dict()[1]
 

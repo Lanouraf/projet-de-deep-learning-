@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import torch
-from homemade_layernorm import homemade_layernorm
+from stream_homemade_layernorm import homemade_layernorm
+from stream_comparaison import comparaison
 
 def main():
     st.title("Batch and Layer Normalization")
@@ -11,7 +12,8 @@ def main():
         "Choisissez l'expérience",
         [
             "Home",
-            "Homemade Layer Normalisation"
+            "Homemade Layer Normalisation",
+            "Comparaison Layer et Batch"
         ],
     )
     if app_mode == "Home":
@@ -22,6 +24,9 @@ def main():
     
     elif app_mode == "Homemade Layer Normalisation":
         homemade_layernorm()
+
+    elif app_mode == "Comparaison Layer et Batch":
+        comparaison()
 
 if __name__ == "__main__":
     main()
