@@ -12,7 +12,6 @@
    - Un graphique des pertes est affiché pour chaque modèle sélectionné.
    - Les accuracies sont affichées pour chaque modèle sélectionné.
 """
-
 import streamlit as st
 import pandas as pd
 import numpy as np
