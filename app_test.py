@@ -24,7 +24,7 @@ def main():
     
     elif app_mode == "Homemade Layer Normalisation":
         homemade_layernorm()
-
+    
     elif app_mode == "Comparaison Layer et Batch":
         comparaison()
 

@@ -33,7 +33,7 @@ Les données sont préparées à l'aide de la fonction prep_data du module Seque
    - Les valeurs de perte d'entraînement sont sauvegardées dans des fichiers .pth pour chaque modèle.
 """
 
-from Sequences import prep_data
+from LNprepdata import prep_data
 from LNModule import BagOfWordsClassifierLayer,BagOfWordsClassifier,BagOfWordsClassifierLayerHM,BagOfWordsClassifierBatchNorm
 from LNtrain import LNtrain,LNtest
 import torch.nn as nn

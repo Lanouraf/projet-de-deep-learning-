@@ -4,6 +4,7 @@ BOW_HM_LN.pth
 BOW_BN.pth
 loss_BN.pth
 losses.pth
+accuracies.csv
 best_model_bn.pth
 best_model_bn2.pth
 best_model_bn3.pth
