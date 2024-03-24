@@ -8,7 +8,7 @@ import os
 import time
 from Batchfonctions import plot_compare  
 from Batchfonctions import test
-from Batcharchitecture import LeNet, LeNetBN , LeNetStockBN
+
 
 
 
@@ -76,14 +76,16 @@ def homemade_batchnormalisation():
     placeholder = st.empty()
     
     # Vérifier si les fichiers de loss existent déjà
-    if not os.path.exists('valeur loss-models-batch//losses_stockbn.npy') or not os.path.exists('valeur loss-models-batch//losses_stockbn.npy') or not os.path.exists('valeur loss-models-batch//losses_bn.npy') or not os.path.exists('valeur loss-models-batch//val_losses_bn.npy'):
-        # Télécharger les fichiers de loss depuis Google Drive si les fichiers n'existent pas
-        placeholder.text("Les fichiers de loss n'ont pas été trouvés. Téléchargement en cours...")
+    # Vérifier si les fichiers de loss sont présents dans le dossier
+    if not os.path.exists('valeur loss-models-batch//losses_vanilla.npy') or not os.path.exists('valeur loss-models-batch//val_losses_vanilla.npy') or not os.path.exists('valeur loss-models-batch//losses_bn.npy') or not os.path.exists('valeur loss-models-batch//val_losses_bn.npy') or not os.path.exists('valeur loss-models-batch//losses_stockbn.npy') or not os.path.exists('valeur loss-models-batch//val_losses_stockbn.npy') or not os.path.exists('valeur loss-models-batch//losses_bn2.npy') or not os.path.exists('valeur loss-models-batch//val_losses_bn2.npy') or not os.path.exists('valeur loss-models-batch//losses_bn3.npy') or not os.path.exists('valeur loss-models-batch//val_losses_bn3.npy') or not os.path.exists('valeur loss-models-batch//losses_vanilla2.npy') or not os.path.exists('valeur loss-models-batch//val_losses_vanilla2.npy'):
+        placeholder.text("Les fichiers de loss ne sont pas présents dans le dossier.")
+
+
        # Liste des IDs de vos fichiers sur Google Drive
-        file_ids = ['19dkl_J39vGJAIVhhG51IOjJavhkP4_fr', '1HEeypE2pBz7KpogT0KW4eQNTEp7hJhSd', '1TIkKrY9uV-oWjYHQE4zvuk4kfpLJgwdV','1YVzklFpo5ty6ApDK-XBzdb18zuogkQsY']
+        file_ids = ['19dkl_J39vGJAIVhhG51IOjJavhkP4_fr', '1HEeypE2pBz7KpogT0KW4eQNTEp7hJhSd','11IH2ZXJ3b_tZezDk8kN3Doar2-cs5YIZ','1h798r9UZZWu89zgtZ75L37YhiYawK6yY','d/19c2MB_l_DqM_ACIbJiQ8HxbWo5O0jQni','1CFV-3f3B_gBgSVwVr8a-Okr1sxGORL8R','1ENI0CFZjgyM9A2rW_tIg6_nAXs6531oS','1Zv725JX9_WRH1WMcajV9RQjQ-zDLuoY8','1ZWC-0GKxJkZP8XbujXyWzIpEVMyov9qa','1xNR6YIpXYTyxdt6Tc8eWqTiC0_y3P8RM' ,'1TIkKrY9uV-oWjYHQE4zvuk4kfpLJgwdV','1YVzklFpo5ty6ApDK-XBzdb18zuogkQsY']
 
         # Liste des noms de fichiers de sortie
-        output_filenames = ['losses_stockbn.npy', 'losses_bn.npy', 'val_losses_stockbn.npy','val_losses_bn.npy']
+        output_filenames = ['losses_stockbn.npy', 'losses_bn.npy','losses_vanilla.npy','losses_vanilla2', 'losses_bn2.npy','losses_bn3.npy' ,'val_losses_vanilla','val_losses_vanilla2' ,'val_losses_bn3','val_losses_bn2','val_losses_stockbn.npy','val_losses_bn.npy']
 
         # Boucle pour télécharger chaque fichier de loss depuis Google Drive
         for file_id, output_filename in zip(file_ids, output_filenames):
@@ -94,109 +96,95 @@ def homemade_batchnormalisation():
     
     # Sinon, afficher un message indiquant que les fichiers de loss existent déjà
     else:
-        placeholder.text("Les fichiers de loss existent déjà.")
+        placeholder.text("Les fichiers de loss sont présents dans le dossier.")
+        time.sleep(3)
+        placeholder.empty()
 
-    # Charger les fichiers de loss suite au téléchargement
-    losses_vanilla = np.load('valeur loss-models-batch//losses_vanilla.npy')
-    val_losses_vanilla = np.load('valeur loss-models-batch//val_losses_vanilla.npy')
-    losses_bn = np.load('valeur loss-models-batch//losses_bn.npy')
-    val_losses_bn = np.load('valeur loss-models-batch//val_losses_bn.npy')
-    losses_stockbn = np.load('valeur loss-models-batch//losses_stockbn.npy')
-    val_losses_stockbn = np.load('valeur loss-models-batch//val_losses_stockbn.npy')
-    losses_bn2 = np.load('valeur loss-models-batch//losses_bn2.npy')
-    val_losses_bn2 = np.load('valeur loss-models-batch//val_losses_bn2.npy')
-    losses_bn3 = np.load('valeur loss-models-batch//losses_bn3.npy')
-    val_losses_bn3 = np.load('valeur loss-models-batch//val_losses_bn3.npy')
-    losses_vanilla2 = np.load('valeur loss-models-batch//losses_vanilla2.npy')
-    val_losses_vanilla2 = np.load('valeur loss-models-batch//val_losses_vanilla2.npy')
+    # Charger les fichiers de loss en mémoire
+    losses_stockbn = np.load('valeur loss-models-batch/losses_stockbn.npy')
+    val_losses_stockbn = np.load('valeur loss-models-batch/val_losses_stockbn.npy')
+    losses_bn = np.load('valeur loss-models-batch/losses_bn.npy')
+    val_losses_bn = np.load('valeur loss-models-batch/val_losses_bn.npy')
+    losses_vanilla = np.load('valeur loss-models-batch/losses_vanilla.npy')
+    val_losses_vanilla = np.load('valeur loss-models-batch/val_losses_vanilla.npy')
+    losses_bn2 = np.load('valeur loss-models-batch/losses_bn2.npy')
+    val_losses_bn2 = np.load('valeur loss-models-batch/val_losses_bn2.npy')
+    losses_bn3 = np.load('valeur loss-models-batch/losses_bn3.npy')
+    val_losses_bn3 = np.load('valeur loss-models-batch/val_losses_bn3.npy')
+    losses_vanilla2 = np.load('valeur loss-models-batch/losses_vanilla2.npy')
+    val_losses_vanilla2 = np.load('valeur loss-models-batch/val_losses_vanilla2.npy')
+    
+    
+    # Vérifier si les fichiers de loss ont été téléchargés avec succès
 
-    if losses_stockbn is not None and losses_bn is not None and val_losses_stockbn is not None and val_losses_bn is not None:
+    if losses_stockbn is not None and losses_bn is not None and val_losses_stockbn is not None and val_losses_bn is not None and losses_vanilla is not None and val_losses_vanilla is not None and losses_bn2 is not None and val_losses_bn2 is not None and losses_bn3 is not None and val_losses_bn3 is not None and losses_vanilla2 is not None and val_losses_vanilla2 is not None:
         placeholder.text("Les fichiers de loss ont été téléchargés avec succès.")
         time.sleep(3)
         placeholder.empty()
-        
+ 
+ 
+ # on charge les loss dans des listes pour les afficher sur le même graphique       
     all_losses_stockbn = []
     all_losses_stockbn.append((losses_stockbn, val_losses_stockbn))
 
     all_losses_bn = []
     all_losses_bn.append((losses_bn, val_losses_bn))
     
+    all_losses_vanilla = []
+    all_losses_vanilla.append((losses_vanilla, val_losses_vanilla))
+
+    all_losses_bn = []
+    all_losses_bn.append((losses_bn, val_losses_bn))
+
+    all_losses_bn2 = []
+    all_losses_bn2.append((losses_bn2, val_losses_bn2))
+
+    all_losses_bn3 = []
+    all_losses_bn3.append((losses_bn3, val_losses_bn3))
+
+    all_losses_vanilla2 = []
+    all_losses_vanilla2.append((losses_vanilla2, val_losses_vanilla2))
+
+    all_losses_stockbn = []
+    all_losses_stockbn.append((losses_stockbn, val_losses_stockbn))
+    
+    #on affiche le graphique de comparaison de la home batchnorm et la stock batchnorm
+
     plot_compare(all_losses_stockbn, all_losses_bn,mode="streamlit", legend_a="LeNet-5 with Pytorch-BatchNorm", legend_b="LeNet-5 with Homemade-BatchNorm", save_to="result_plot_batch/StockBN_vs_BatchNorm")
     
     st.write("On peut remarquer que la batch normalisation Pytorch à des performances similaires à notre batch normalisation homemade, ce qui veut dire que notre implémentation est efficace.")
     #on recupères les modèles entrainées depuis google drive et on calcule la précision sur le jeu de test
     
-    #on recupère les données de test 
-    transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5), (0.5))])
-    test1 = datasets.MNIST(root="dataset", train=False, transform=transform, download=True)
-    test_dataloader = DataLoader(test1, batch_size=512, shuffle=False)
-    
-    
-    placeholder = st.empty()
-    
-    # Vérifier si les fichiers de loss existent déjà
-    if not os.path.exists('batch/modèles_stockbn_entrainé.pth') or not os.path.exists('batch/modèle_bn_entrainé.pth') :
-        # Télécharger les fichiers de loss
-        placeholder.text("Les fichiers de modèles n'ont pas été trouvés. Téléchargement en cours...")
-       # Liste des IDs de vos fichiers sur Google Drive
-        file_ids = ['1x9EpK8hLu4obAFoy14_tN2OdsKMB_-xq', '1_LdtVZNoiwb2BzfqI6yjSAbOxDGMRTny']
-
-        # Liste des noms de fichiers de sortie
-        output_filenames = ['modèles_stockbn_entrainé.pth', 'modèle_bn_entrainé.pth']
-
-        # Boucle pour télécharger chaque fichier de loss depuis Google Drive
-        for file_id, output_filename in zip(file_ids, output_filenames):
-            url = f'https://drive.google.com/file/d/{file_id}/view?usp=sharing'
-            dest_path = './batch/' + output_filename
-         
-            gdd.download_file_from_google_drive(file_id=file_id, dest_path=dest_path, overwrite=True, showsize=True)
-    
-    
+    if not os.path.exists('batch/accuracies.pth'):
+        file_id = '157Iol19Wp0AjaS7VL2UtD-Jx2ePVofVL'
+        dest_path = './batch/accuracies.pth'
+        gdd.download_file_from_google_drive(file_id=file_id, dest_path=dest_path, overwrite=True, showsize=True)
     else:
-        placeholder.text("Les fichiers de modèles existent déjà.")
-        
-    #charger les modèles 
-    modèle_stockbn=LeNetStockBN() 
-    modèles_stockbn_entrainé=torch.load('batch/modèles_stockbn_entrainé.pth')
-    modèle_stockbn.load_state_dict(modèles_stockbn_entrainé)
-    
-    
-    modèle_bn=LeNetBN()
-    modèle_bn_entrainé=torch.load('batch/modèle_bn_entrainé.pth')
-    modèle_bn.load_state_dict(modèle_bn_entrainé)
-    
-    # Vérifier si les modèles ont été importés avec succès
-    if modèles_stockbn_entrainé is not None and modèle_bn_entrainé is not None:
-        placeholder.text("Les modèles ont été importés avec succès.")
+        placeholder.text("Le fichier d'accuracies existe déjà.")
         time.sleep(3)
         placeholder.empty()
-    else:
-        placeholder.text("Erreur lors de l'importation des modèles.")
-        
-    # Calculer la précision sur le jeu de test
-    _, testacc_stockbn = test(modèle_stockbn, test_dataloader)
-    _, testacc_bn = test(modèle_bn, test_dataloader)
     
-    st.write("La précision du modèle LeNet-5 avec BatchNorm sur le jeu de test est de {:.2f}%.".format(testacc_bn * 100))
-    st.write("La précision du modèle LeNet-5 sans BatchNorm sur le jeu de test est de {:.2f}%.".format(testacc_stockbn * 100))
+    
+    #on charge les accuracies    
+    accuracies = torch.load('batch/accuracies.pth')
+    
+    
+    st.write("La précision du modèle LeNet-5 avec la  homemade Batch Normalisation sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_bn'] * 100))
+    st.write("La précision du modèle LeNet-5 avec la batch normalisation de pytorch sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_stockbn']* 100))
     
     
     # Demander à l'utilisateur de choisir les 2 modèles qu'il veut comparer
-    models = st.multiselect("Choisir les modèles", ["LeNet-5 with Pytorch-BatchNorm", "LeNet-5 with Homemade-BatchNorm"])
+    models = st.multiselect("Choisir les modèles", ["LeNet-5 with Pytorch-BatchNorm", "LeNet-5 with Homemade-BatchNorm", "LeNet-5 with Homemade-BatchNorm with a 1e-2 learning rate", "LeNet-5 with Homemade-BatchNorm with a 5e-2 learning rate", "LeNet-5 without modification", "LeNet-5 without modification and a 5e-2 learning rate"], key='models')
 
     # Vérifier les choix de l'utilisateur et afficher le graphique de comparaison correspondant
     if len(models) == 2:
         if "LeNet-5 with Pytorch-BatchNorm" in models and "LeNet-5 with Homemade-BatchNorm" in models:
             plot_compare(all_losses_stockbn, all_losses_bn, mode="streamlit", legend_a="LeNet-5 with Pytorch-BatchNorm", legend_b="LeNet-5 with Homemade-BatchNorm", save_to="result_plot_batch/StockBN_vs_BatchNorm")
-            
-            # Calculer la précision sur le jeu de test pour les modèles choisis
-            if "LeNet-5 with Pytorch-BatchNorm" in models:
-                _, testacc_modèle1 = test(modèle_stockbn, test_dataloader)
-                st.write("La précision du modèle LeNet-5 with Pytorch-BatchNorm sur le jeu de test est de {:.2f}%.".format(testacc_modèle1 * 100))
-            
-            if "LeNet-5 with Homemade-BatchNorm" in models:
-                _, testacc_model2 = test(modèle_bn, test_dataloader)
-                st.write("La précision du modèle LeNet-5 with Homemade-BatchNorm sur le jeu de test est de {:.2f}%.".format(testacc_model2 * 100))
+        elif "LeNet-5 with Pytorch-BatchNorm" in models:
+                st.write("La précision du modèle LeNet-5 avec la batch normalisation de pytorch sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_stockbn']* 100))
+        elif "LeNet-5 with Homemade-BatchNorm" in models:
+                st.write("La précision du modèle LeNet-5 avec la  homemade Batch Normalisation sur le jeu de test est de {:.2f}%.".format(accuracies['modèle_bn'] * 100))
+
 
         else:
             st.write("Veuillez sélectionner les modèles corrects.")
