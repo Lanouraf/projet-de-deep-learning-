@@ -29,7 +29,6 @@ def data_review():
     df = pd.read_csv(DATA_PATH)
     return df
 
-
 def data_apple():
     """
     Loads the Apple quality data.
