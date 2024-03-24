@@ -56,9 +56,15 @@ def homemade_batchnormalisation():
     descriptionMNISt()
     
     # Instructions sur les modèles entraînés
-    st.write("Nous avons pour cette expérience entrainées 2 modèles:")
-    st.write("- Un modèle LeNet-5  avec la BatchNorm de Pytorch")
-    st.write("- Un modèle LeNet-5 avec notre BatchNorm fait main")
+    st.write("Nous avons pour cette expérience entrainées 6 modèles:")
+    st.write("- Un modèle LeNet-5  avec la BatchNorm de Pytorch et un learning rate de 1e-3")
+    st.write("- Un modèle LeNet-5 avec notre BatchNorm fait main et un learning rate de 1e-3")
+    st.write("- Un modèle LeNet-5 avec notre BatchNorm fait main et un learning rate de 1e-2")
+    st.write("- Un modèle LeNet-5 avec notre BatchNorm fait main et un learning rate de 5e-2")
+    st.write("- Un modèle LeNet-5 simple sans batch normalisation et un learning rate de 1e-3")
+    st.write("- Un modèle LeNet-5 simple sans batch normalisation et un learning rate de 5e-2")
+    
+    st.write(" Tout d'abord nous allons comparer les courbes de perte d'entraînement et de perte de validation pour les modèles LeNet-5 avec la batchnorm Pytorch et la homemade BatchNorm.")
     
     # Instructions sur les fichiers de loss     
     
@@ -94,7 +100,7 @@ def homemade_batchnormalisation():
 
     if losses_stockbn is not None and losses_bn is not None and val_losses_stockbn is not None and val_losses_bn is not None:
         placeholder.text("Les fichiers de loss ont été téléchargés avec succès.")
-        time.sleep(5)
+        time.sleep(3)
         placeholder.empty()
         
     all_losses_stockbn = []
@@ -151,7 +157,7 @@ def homemade_batchnormalisation():
     # Vérifier si les modèles ont été importés avec succès
     if modèles_stockbn_entrainé is not None and modèle_bn_entrainé is not None:
         placeholder.text("Les modèles ont été importés avec succès.")
-        time.sleep(5)
+        time.sleep(3)
         placeholder.empty()
     else:
         placeholder.text("Erreur lors de l'importation des modèles.")
@@ -164,7 +170,28 @@ def homemade_batchnormalisation():
     st.write("La précision du modèle LeNet-5 sans BatchNorm sur le jeu de test est de {:.2f}%.".format(testacc_stockbn * 100))
     
     
-    
+    # Demander à l'utilisateur de choisir les 2 modèles qu'il veut comparer
+    models = st.multiselect("Choisir les modèles", ["LeNet-5 with Pytorch-BatchNorm", "LeNet-5 with Homemade-BatchNorm"])
+
+    # Vérifier les choix de l'utilisateur et afficher le graphique de comparaison correspondant
+    if len(models) == 2:
+        if "LeNet-5 with Pytorch-BatchNorm" in models and "LeNet-5 with Homemade-BatchNorm" in models:
+            plot_compare(all_losses_stockbn, all_losses_bn, mode="streamlit", legend_a="LeNet-5 with Pytorch-BatchNorm", legend_b="LeNet-5 with Homemade-BatchNorm", save_to="result_plot_batch/StockBN_vs_BatchNorm")
+            
+            # Calculer la précision sur le jeu de test pour les modèles choisis
+            if "LeNet-5 with Pytorch-BatchNorm" in models:
+                _, testacc_modèle1 = test(modèle_stockbn, test_dataloader)
+                st.write("La précision du modèle LeNet-5 with Pytorch-BatchNorm sur le jeu de test est de {:.2f}%.".format(testacc_modèle1 * 100))
+            
+            if "LeNet-5 with Homemade-BatchNorm" in models:
+                _, testacc_model2 = test(modèle_bn, test_dataloader)
+                st.write("La précision du modèle LeNet-5 with Homemade-BatchNorm sur le jeu de test est de {:.2f}%.".format(testacc_model2 * 100))
+
+        else:
+            st.write("Veuillez sélectionner les modèles corrects.")
+    else:
+        st.write("Veuillez sélectionner exactement deux modèles.")
+            
     
     
      
