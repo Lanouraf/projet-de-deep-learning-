@@ -29,26 +29,6 @@ def data_review():
     df = pd.read_csv(DATA_PATH)
     return df
 
-def data_twitter():
-    """
-    Loads the Apple Twitter sentiment texts data.
-
-    Returns
-    -------
-    df : pd.DataFrame
-        DataFrame containing Apple Twitter sentiment texts data.
-
-    Notes
-    -----
-    This function loads the Apple Twitter sentiment texts dataset from Kaggle.
-    The dataset consists of tweets related to Apple, along with their sentiment labels.
-
-    """
-    directory = "apple-twitter-sentiment-texts.csv"
-    # Read the dataset into a DataFrame
-    home_data = pd.read_csv(directory)
-    return home_data
-
 def data_apple():
     """
     Loads the Apple quality data.
@@ -66,5 +46,5 @@ def data_apple():
     """
     directory = "apple_quality.csv"
     # Read the dataset into a DataFrame
-    home_data = pd.read_csv(directory)
-    return home_data
+    df = pd.read_csv(directory)
+    return df
