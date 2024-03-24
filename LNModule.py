@@ -1,7 +1,6 @@
 """
 Ce fichier contient plusieurs classes de modèles de classification de type Bag-of-Words, utilisés dans le cadre de l'apprentissage de réseaux de neurones avec PyTorch.
 Chaque classe de modèle implémente une architecture spécifique avec différentes couches de normalisation.
-
 1. BagOfWordsClassifier:
    - Modèle de classification Bag-of-Words sans couches de normalisation.
    - Il consiste en trois couches linéaires avec des fonctions d'activation ReLU.
@@ -21,8 +20,6 @@ Chaque classe de modèle implémente une architecture spécifique avec différen
    - Utilise une implémentation personnalisée de la normalisation de couche après chaque couche linéaire.
    - Il consiste en trois couches linéaires avec des fonctions d'activation ReLU et de Homemade Layer Normalization.
 """
-
-
 import torch.nn as nn
 import torch
 from LN_HOMEMADE_LN import LayerNorm
